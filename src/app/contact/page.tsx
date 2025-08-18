@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
@@ -115,6 +116,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

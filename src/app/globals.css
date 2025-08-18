@@ -3,6 +3,47 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Cambon Font Family */
+@font-face {
+  font-family: "Cambon";
+  src: url("/fonts/Cambon/Cambon-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cambon";
+  src: url("/fonts/Cambon/Cambon-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cambon";
+  src: url("/fonts/Cambon/Cambon-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cambon";
+  src: url("/fonts/Cambon/Cambon-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cambon";
+  src: url("/fonts/Cambon/Cambon-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -127,5 +168,42 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-roboto), ui-sans-serif, system-ui, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
+    font-weight: 300;
+  }
+
+  /* Apply Cambon font to all headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Cambon", ui-sans-serif, system-ui, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
+  }
+
+  h1 {
+    font-weight: 600; /* ExtraBold */
+  }
+
+  h2 {
+    font-weight: 700; /* Bold */
+  }
+
+  h3 {
+    font-weight: 600; /* SemiBold */
+  }
+
+  h4 {
+    font-weight: 500; /* Medium */
+  }
+
+  h5,
+  h6 {
+    font-weight: 400; /* Regular */
   }
 }
