@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import Script from "next/script";
 import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const GA_ID = process.env.GA_TRACKING_ID;
 
@@ -39,30 +40,32 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
-        {GA_ID && (
-          <>
-            <Script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            />
-            <Script
-              id="ga-init"
-              dangerouslySetInnerHTML={{
-                __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_ID}');
-        `,
-              }}
-            />
-            <Suspense fallback={null}>
-              <Analytics id={GA_ID} />
-            </Suspense>
-          </>
-        )}
-        {children}
+      <body className="min-h-screen bg-background text-foreground antialiased">
+        <ThemeProvider defaultTheme="dark" storageKey="rtr-ui-theme">
+          {GA_ID && (
+            <>
+              <Script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              />
+              <Script
+                id="ga-init"
+                dangerouslySetInnerHTML={{
+                  __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `,
+                }}
+              />
+              <Suspense fallback={null}>
+                <Analytics id={GA_ID} />
+              </Suspense>
+            </>
+          )}
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

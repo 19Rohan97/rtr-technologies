@@ -1,31 +1,106 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { FolderOpen } from "lucide-react";
 import { projects } from "@/content/projects";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut" as const,
+    },
+  },
+};
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center">
-          Portfolio Highlights
-        </h2>
+    <section id="portfolio" className="py-16 md:py-24 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/50 via-transparent to-blue-50/30 dark:from-yellow-900/10 dark:via-transparent dark:to-blue-900/10" />
+      <div className="absolute top-20 left-10 w-32 h-32 bg-yellow-200/20 dark:bg-yellow-600/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-200/20 dark:bg-blue-600/10 rounded-full blur-3xl" />
 
-        <p className="mt-3 text-center text-gray-600">
-          Here’s a glimpse of projects we’ve worked on. More case studies
-          launching soon!
-        </p>
+      <div className="mx-auto max-w-6xl px-4 relative">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
+        >
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full text-sm font-medium mb-6"
+          >
+            <FolderOpen className="w-4 h-4" />
+            Portfolio Highlights
+          </motion.div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p) => (
-            <div key={p.title} className="rounded-2xl border p-5 shadow-sm">
+          <motion.h2
+            variants={itemVariants}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+          >
+            <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+              Our Work
+            </span>
+            <br />
+            Speaks For Itself
+          </motion.h2>
+
+          <motion.p
+            variants={itemVariants}
+            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto"
+          >
+            Here&apos;s a glimpse of projects we&apos;ve crafted with passion
+            and precision. Each project represents our commitment to delivering
+            exceptional digital experiences that drive real business results.
+            More case studies launching soon!
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {projects.map((p, index) => (
+            <motion.div
+              key={p.title}
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+              className="rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
+            >
               {/* Placeholder thumbnail */}
-              <div className="aspect-[16/9] rounded-xl bg-gradient-to-br from-gray-100 to-gray-200" />
-              <h3 className="mt-4 font-semibold text-lg">{p.title}</h3>
-              <p className="mt-1 text-sm text-gray-600">{p.blurb}</p>
+              <div className="aspect-[16/9] rounded-xl bg-gradient-to-br from-yellow-100 via-gray-100 to-yellow-50 dark:from-yellow-900/20 dark:via-gray-800 dark:to-yellow-900/10 mb-4" />
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">
+                {p.title}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                {p.blurb}
+              </p>
 
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {p.tags.map((t) => (
                   <span
                     key={t}
-                    className="text-xs rounded-full border px-2 py-1"
+                    className="text-xs rounded-full border border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 px-2 py-1"
                   >
                     {t}
                   </span>
@@ -33,13 +108,13 @@ export default function Portfolio() {
               </div>
 
               {p.comingSoon && (
-                <p className="mt-3 inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs">
+                <div className="inline-flex items-center rounded-md bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-3 py-1 text-xs font-medium">
                   Coming Soon
-                </p>
+                </div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -15,7 +15,7 @@ export default function Hero() {
           <div className="w-full px-4 md:pl-[max(1rem,calc((100vw-80rem)/2+0rem))]">
             <div className="max-w-xl">
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl tracking-tight text-gray-900"
+                className="text-4xl md:text-5xl lg:text-6xl tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -38,7 +38,13 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Button asChild size="lg" className="text-base px-8 py-3">
+                <Button
+                  asChild
+                  variant="primary"
+                  size="lg"
+                  className="text-base px-8 py-3"
+                  withRipple
+                >
                   <Link href={SITE.ctas.primary.href}>
                     {SITE.ctas.primary.label}
                   </Link>
@@ -48,6 +54,7 @@ export default function Hero() {
                   variant="outline"
                   size="lg"
                   className="text-base px-8 py-3"
+                  withRipple
                 >
                   <Link href={SITE.ctas.secondary.href}>
                     {SITE.ctas.secondary.label}

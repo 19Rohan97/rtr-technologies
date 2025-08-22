@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { SITE } from "@/content/site";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import Image from "next/image";
 
 const nav = [
@@ -13,7 +14,7 @@ const nav = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b">
+    <header className="sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur border-b dark:border-gray-800">
       <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
         <Link href="/" className="font-semibold">
           <Image
@@ -35,11 +36,11 @@ export default function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Link href={SITE.ctas.secondary.href} className="hidden sm:block">
-            {/* fallback if you skipped shadcn */}
-            <span className="px-3 py-2 rounded border">Request a Quote</span>
-          </Link>
-          <Button asChild>
+          <ThemeToggle />
+          <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
+            <Link href={SITE.ctas.secondary.href}>Request a Quote</Link>
+          </Button>
+          <Button asChild variant="primary" size="sm" withRipple>
             <Link href={SITE.ctas.primary.href}>{SITE.ctas.primary.label}</Link>
           </Button>
         </div>

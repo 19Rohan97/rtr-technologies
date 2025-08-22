@@ -4,7 +4,6 @@ import About from "@/components/sections/About";
 import Services from "@/components/sections/Services";
 import Portfolio from "@/components/sections/Portfolio";
 import Testimonials from "@/components/sections/Testimonials";
-import ContactTeaser from "@/components/sections/ContactTeaser";
 import Footer from "@/components/layout/Footer";
 
 export const metadata = {
@@ -36,7 +35,6 @@ export default function HomePage() {
       <Services />
       <Portfolio />
       <Testimonials />
-      <ContactTeaser />
       <Footer />
     </>
   );
