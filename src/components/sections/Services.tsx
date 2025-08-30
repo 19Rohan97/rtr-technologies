@@ -140,8 +140,8 @@ export default function Services({ services }: { services?: ServiceItem[] }) {
                     className="w-full"
                     withRipple
                   >
-                    <Link href={(s as any).cta?.href || s.ctaHref || "/contact"}>
-                      {(s as any).cta?.label || s.ctaLabel || "Request a Quote"}
+                    <Link href={s.cta?.href || s.ctaHref || "/contact"}>
+                      {s.cta?.label || s.ctaLabel || "Request a Quote"}
                     </Link>
                   </Button>
                 </div>
