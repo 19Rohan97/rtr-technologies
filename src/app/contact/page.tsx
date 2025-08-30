@@ -6,6 +6,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageBanner from "@/components/ui/page-banner";
 import { Button } from "@/components/ui/button";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbsSchema } from "@/seo/breadcrumbs";
+import { contactPageSchema } from "@/seo/contact";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
@@ -56,6 +59,14 @@ export default function ContactPage() {
 
   return (
     <>
+      <JsonLd id="ld-contact" data={contactPageSchema()} />
+      <JsonLd
+        id="ld-breadcrumbs"
+        data={breadcrumbsSchema([
+          { name: "Home", url: "/" },
+          { name: "Contact", url: "/contact" },
+        ])}
+      />
       <Header />
       <PageBanner
         title="Contact Us"

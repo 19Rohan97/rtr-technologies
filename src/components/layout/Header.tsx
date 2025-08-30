@@ -5,6 +5,7 @@ import { SITE } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import Image from "next/image";
+import CalendlyButton from "@/components/CalendlyButton";
 
 const nav = [
   { href: "/services", label: "Services" },
@@ -40,9 +41,7 @@ export default function Header() {
           <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
             <Link href={SITE.ctas.secondary.href}>Request a Quote</Link>
           </Button>
-          <Button asChild variant="primary" size="sm" withRipple>
-            <Link href={SITE.ctas.primary.href}>{SITE.ctas.primary.label}</Link>
-          </Button>
+          <CalendlyButton label={SITE.ctas.primary.label} variant="primary" size="sm" withRipple />
         </div>
       </div>
     </header>

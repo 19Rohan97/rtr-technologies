@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { SITE } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import CalendlyButton from "@/components/CalendlyButton";
 import {
   Mail,
   Phone,
@@ -121,15 +122,13 @@ export default function Footer() {
               digital reality that drives results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
+              <CalendlyButton
+                label="Start Your Project"
                 variant="primary"
                 size="xl"
-                className="text-lg px-10 py-4"
                 withRipple
-              >
-                <Link href="/contact">Start Your Project</Link>
-              </Button>
+                className="text-lg px-10 py-4"
+              />
               <Button
                 asChild
                 variant="outline"
