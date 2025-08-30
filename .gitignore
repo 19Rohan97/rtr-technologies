@@ -46,3 +46,6 @@ next-env.d.ts
 
 # memory bank (project documentation)
 memory-bank/
+
+# Windows reserved device names that may appear as phantom entries in Git on Windows
+CON
