@@ -6,7 +6,7 @@ export function absUrl(path: string) {
   return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export function clean<T extends Record<string, any>>(obj: T): T {
+export function clean<T extends Record<string, unknown>>(obj: T): T {
   return Object.fromEntries(
     Object.entries(obj).filter(([, v]) => v !== undefined && v !== null && v !== "")
   ) as T;

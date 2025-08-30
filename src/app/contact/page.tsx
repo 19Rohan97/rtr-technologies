@@ -27,7 +27,7 @@ export default async function ContactPage() {
       <Header />
       <PageBanner
         title="Contact Us"
-        description="Ready to start your project? Tell us a bit about it. We're here to help you transform your digital presence and achieve your business goals."
+        description="Ready to start your project? Tell us a bit about it. We&apos;re here to help you transform your digital presence and achieve your business goals."
         breadcrumbs={[{ label: "Contact" }]}
       />
       <section className="py-16 md:py-24">
@@ -37,10 +37,10 @@ export default async function ContactPage() {
             <div className="space-y-8">
               {/* Contact Content */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Let's Start a Conversation</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Let&apos;s Start a Conversation</h2>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                  We're here to help you transform your digital presence and achieve your business goals. Whether you need a
-                  new website, SEO optimization, or ongoing support, we'd love to hear from you.
+                  We&apos;re here to help you transform your digital presence and achieve your business goals. Whether you need a
+                  new website, SEO optimization, or ongoing support, we&apos;d love to hear from you.
                 </p>
               </div>
 
@@ -56,7 +56,7 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Email Us</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-2">Send us an email and we'll get back to you within 24 hours.</p>
+                      <p className="text-gray-600 dark:text-gray-300 mb-2">Send us an email and we&apos;ll get back to you within 24 hours.</p>
                       <a
                         href={`mailto:${site.email}`}
                         className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 font-medium transition-colors"

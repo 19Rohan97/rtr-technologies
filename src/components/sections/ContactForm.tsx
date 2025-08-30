@@ -20,9 +20,12 @@ export default function ContactForm() {
 
     const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    const submitData = { ...data, recaptchaToken } as Record<string, any>;
+    const submitData: { name: string; email: string; message: string; recaptchaToken: string } = {
+      name: String(formData.get("name") || ""),
+      email: String(formData.get("email") || ""),
+      message: String(formData.get("message") || ""),
+      recaptchaToken,
+    };
 
     const res = await fetch("/api/contact", {
       method: "POST",
