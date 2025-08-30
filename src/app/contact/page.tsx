@@ -6,13 +6,13 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { contactPageSchema } from "@/seo/contact";
 import ContactForm from "@/components/sections/ContactForm";
-import { sanity } from "@/lib/sanity.client";
-import { siteSettingsQuery } from "@/lib/sanity.queries";
+import { SITE } from "@/content/site";
 
 export const revalidate = 60;
 
-export default async function ContactPage() {
-  const site = await sanity.fetch(siteSettingsQuery);
+export default function ContactPage() {
+  const email = SITE.email;
+  const phone: string | undefined = undefined;
 
   return (
     <>
@@ -47,7 +47,7 @@ export default async function ContactPage() {
               {/* Contact Details */}
               <div className="space-y-6">
                 {/* Email */}
-                {site?.email && (
+                {email && (
                   <div className="flex items-start gap-4 p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50">
                     <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,17 +58,17 @@ export default async function ContactPage() {
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Email Us</h3>
                       <p className="text-gray-600 dark:text-gray-300 mb-2">Send us an email and we&apos;ll get back to you within 24 hours.</p>
                       <a
-                        href={`mailto:${site.email}`}
+                        href={`mailto:${email}`}
                         className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 font-medium transition-colors"
                       >
-                        {site.email}
+                        {email}
                       </a>
                     </div>
                   </div>
                 )}
 
                 {/* Phone */}
-                {site?.phone && (
+                {phone && (
                   <div className="flex items-start gap-4 p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50">
                     <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@ export default async function ContactPage() {
                         href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}
                         className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 font-medium transition-colors"
                       >
-                        {site.phone}
+                        {phone}
                       </a>
                     </div>
                   </div>
@@ -128,7 +128,7 @@ export default async function ContactPage() {
           </div>
         </div>
       </section>
-      <Footer site={site} />
+      <Footer />
     </>
   );
 }

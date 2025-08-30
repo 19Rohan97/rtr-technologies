@@ -13,8 +13,7 @@ import WhyUs from "@/components/sections/WhyUs";
 
 export const revalidate = 60;
 
-export default async function ServicesPage() {
-  const site = await sanity.fetch(siteSettingsQuery);
+export default function ServicesPage() {
   return (
     <>
       <JsonLd id="ld-services" data={servicesSchema()} />

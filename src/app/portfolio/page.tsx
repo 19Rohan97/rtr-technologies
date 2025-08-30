@@ -9,8 +9,7 @@ import { portfolioSchema } from "@/seo/portfolio";
 
 export const revalidate = 60;
 
-export default async function PortfolioPage() {
-  const site = await sanity.fetch(siteSettingsQuery);
+export default function PortfolioPage() {
   return (
     <>
       <JsonLd id="ld-portfolio" data={portfolioSchema()} />
@@ -29,7 +28,7 @@ export default async function PortfolioPage() {
         breadcrumbs={[{ label: "Portfolio" }]}
       />
       <PortfolioDetailed />
-      <Footer site={site} />
+      <Footer />
     </>
   );
 }
