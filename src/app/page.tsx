@@ -36,13 +36,7 @@ export const metadata = {
 
 export const revalidate = 60;
 
-export default async function HomePage() {
-  const [site, services, projects, testimonials] = await Promise.all([
-    sanity.fetch(siteSettingsQuery),
-    sanity.fetch(servicesQuery),
-    sanity.fetch(projectsQuery),
-    sanity.fetch(testimonialsQuery),
-  ]);
+export default function HomePage() {
 
   return (
     <>
