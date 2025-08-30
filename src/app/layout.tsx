@@ -68,7 +68,6 @@ export default function RootLayout({
           )}
           {children}
           <VercelAnalytics />
-          {/* Mobile bottom navigation */}
           <MobileNav />
         </ThemeProvider>
       </body>
