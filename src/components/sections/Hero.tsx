@@ -6,7 +6,27 @@ import Image from "next/image";
 import { SITE } from "@/content/site";
 import { Button } from "@/components/ui/button";
 
-export default function Hero() {
+type SiteSettings = {
+  name?: string;
+  tagline?: string;
+  description?: string;
+  ctas?: {
+    primaryLabel?: string;
+    primaryHref?: string;
+    secondaryLabel?: string;
+    secondaryHref?: string;
+  };
+};
+
+export default function Hero({ site }: { site?: SiteSettings }) {
+  const primary = {
+    label: site?.ctas?.primaryLabel ?? SITE.ctas.primary.label,
+    href: site?.ctas?.primaryHref ?? SITE.ctas.primary.href,
+  };
+  const secondary = {
+    label: site?.ctas?.secondaryLabel ?? SITE.ctas.secondary.label,
+    href: site?.ctas?.secondaryHref ?? SITE.ctas.secondary.href,
+  };
   return (
     <section className="relative overflow-hidden">
       <div className="grid lg:grid-cols-2 min-h-[80vh]">
@@ -20,7 +40,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                {SITE.tagline}
+                {site?.tagline || site?.name || SITE.tagline}
               </motion.h1>
 
               <motion.p
@@ -29,7 +49,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                {SITE.description}
+                {site?.description ?? SITE.description}
               </motion.p>
 
               <motion.div
@@ -45,9 +65,7 @@ export default function Hero() {
                   className="text-base px-8 py-3"
                   withRipple
                 >
-                  <Link href={SITE.ctas.primary.href}>
-                    {SITE.ctas.primary.label}
-                  </Link>
+                  <Link href={primary.href}>{primary.label}</Link>
                 </Button>
                 <Button
                   asChild
@@ -56,9 +74,7 @@ export default function Hero() {
                   className="text-base px-8 py-3"
                   withRipple
                 >
-                  <Link href={SITE.ctas.secondary.href}>
-                    {SITE.ctas.secondary.label}
-                  </Link>
+                  <Link href={secondary.href}>{secondary.label}</Link>
                 </Button>
               </motion.div>
             </div>

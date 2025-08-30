@@ -5,6 +5,13 @@ import Services from "@/components/sections/Services";
 import Portfolio from "@/components/sections/Portfolio";
 import Testimonials from "@/components/sections/Testimonials";
 import Footer from "@/components/layout/Footer";
+import { sanity } from "@/lib/sanity.client";
+import {
+  siteSettingsQuery,
+  servicesQuery,
+  projectsQuery,
+  testimonialsQuery,
+} from "@/lib/sanity.queries";
 
 export const metadata = {
   title: "RTR Technologies – WordPress Growth Partner",
@@ -26,16 +33,25 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const [site, services, projects, testimonials] = await Promise.all([
+    sanity.fetch(siteSettingsQuery),
+    sanity.fetch(servicesQuery),
+    sanity.fetch(projectsQuery),
+    sanity.fetch(testimonialsQuery),
+  ]);
+
   return (
     <>
-      <Header />
-      <Hero />
+      <Header site={site} />
+      <Hero site={site} />
       <About />
-      <Services />
-      <Portfolio />
-      <Testimonials />
-      <Footer />
+      <Services services={services} />
+      <Portfolio projects={projects} />
+      <Testimonials testimonials={testimonials} />
+      <Footer site={site} />
     </>
   );
 }

@@ -61,7 +61,12 @@ const features = [
   { icon: Zap, text: "Lightning Fast" },
 ];
 
-export default function Footer() {
+type SiteSettings = {
+  email?: string;
+  phone?: string;
+};
+
+export default function Footer({ site }: { site?: SiteSettings }) {
   return (
     <footer className="relative mt-[160px]">
       {/* Background Elements */}
@@ -222,13 +227,30 @@ export default function Footer() {
                     Email
                   </p>
                   <a
-                    href="mailto:connect@rtr-technologies.com"
+                    href={`mailto:${site?.email ?? SITE.email}`}
                     className="text-gray-900 dark:text-white hover:text-yellow-600 dark:hover:text-yellow-400 transition-colors"
                   >
-                    connect@rtr-technologies.com
+                    {site?.email ?? SITE.email}
                   </a>
                 </div>
               </div>
+
+              {site?.phone && (
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-yellow-600 dark:text-yellow-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Phone</p>
+                    <a
+                      href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}
+                      className="text-gray-900 dark:text-white hover:text-yellow-600 dark:hover:text-yellow-400 transition-colors"
+                    >
+                      {site.phone}
+                    </a>
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">

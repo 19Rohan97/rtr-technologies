@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MessageSquare, ChevronLeft, ChevronRight } from "lucide-react";
-import { testimonials } from "@/content/testimonials";
+import { testimonials as fallbackTestimonials } from "@/content/testimonials";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -29,13 +29,16 @@ const itemVariants = {
   },
 };
 
-export default function Testimonials() {
+type TestimonialItem = { _id?: string; quote: string; author: string };
+
+export default function Testimonials({ testimonials }: { testimonials?: TestimonialItem[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Calculate total slides (2 testimonials per slide)
+  const data = (testimonials?.length ? testimonials : (fallbackTestimonials as TestimonialItem[])) as TestimonialItem[];
   const testimonialsPerSlide = 2;
-  const totalSlides = Math.ceil(testimonials.length / testimonialsPerSlide);
+  const totalSlides = Math.ceil(data.length / testimonialsPerSlide);
 
   // Auto-play functionality
   useEffect(() => {
@@ -63,7 +66,7 @@ export default function Testimonials() {
     setIsAutoPlaying(false); // Stop autoplay when user interacts
   };
 
-  if (!testimonials.length) return null;
+  if (!data.length) return null;
 
   return (
     <section id="testimonials" className="py-16 md:py-24">
@@ -118,7 +121,7 @@ export default function Testimonials() {
                   key={slideIndex}
                   className="w-full flex-shrink-0 grid md:grid-cols-2 gap-6 px-2"
                 >
-                  {testimonials
+                  {data
                     .slice(
                       slideIndex * testimonialsPerSlide,
                       (slideIndex + 1) * testimonialsPerSlide

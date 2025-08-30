@@ -9,7 +9,7 @@ import {
   BarChart3,
   TrendingUp,
 } from "lucide-react";
-import { services } from "@/content/services";
+import { services as fallbackServices } from "@/content/services";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -44,7 +44,23 @@ const itemVariants = {
   },
 };
 
-export default function Services() {
+type ServiceItem = {
+  _id?: string;
+  title: string;
+  desc: string;
+  icon: string;
+  cta?: { label: string; href: string };
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+export default function Services({ services }: { services?: ServiceItem[] }) {
+  const data: ServiceItem[] = services?.length
+    ? services.map((s) => ({
+        ...s,
+        cta: { label: s.ctaLabel ?? "Request a Quote", href: s.ctaHref ?? "/contact" },
+      }))
+    : (fallbackServices as ServiceItem[]);
   return (
     <section id="services" className="py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4">
@@ -91,7 +107,7 @@ export default function Services() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {services.map((s, index) => {
+          {data.map((s, index) => {
             const IconComponent = iconMap[s.icon as keyof typeof iconMap];
             return (
               <motion.div
@@ -124,7 +140,9 @@ export default function Services() {
                     className="w-full"
                     withRipple
                   >
-                    <Link href={s.cta.href}>{s.cta.label}</Link>
+                    <Link href={(s as any).cta?.href || s.ctaHref || "/contact"}>
+                      {(s as any).cta?.label || s.ctaLabel || "Request a Quote"}
+                    </Link>
                   </Button>
                 </div>
               </motion.div>
