@@ -5,6 +5,7 @@ import Script from "next/script";
 import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
 import { ThemeProvider } from "@/components/theme-provider";
+import MobileNav from "@/components/layout/MobileNav";
 
 const GA_ID = process.env.GA_TRACKING_ID;
 
@@ -40,7 +41,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-background text-foreground antialiased">
+      <body className="min-h-screen bg-background text-foreground antialiased pb-[calc(env(safe-area-inset-bottom)+4rem)] sm:pb-0">
         <ThemeProvider defaultTheme="dark" storageKey="rtr-ui-theme">
           {GA_ID && (
             <>
@@ -65,6 +66,8 @@ export default function RootLayout({
             </>
           )}
           {children}
+          {/* Mobile bottom navigation */}
+          <MobileNav />
         </ThemeProvider>
       </body>
     </html>

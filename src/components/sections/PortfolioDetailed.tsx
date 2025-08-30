@@ -126,37 +126,6 @@ const detailedProjects = [
     status: "Coming Soon",
     cta: { label: "View Case Study", href: "/contact" },
   },
-  {
-    title: "Non-Profit Organization Site",
-    description:
-      "A mission-driven website for a non-profit organization with donation integration, volunteer management, and event promotion capabilities.",
-    image: "/hero-image.webp",
-    category: "Non-Profit",
-    duration: "7 weeks",
-    teamSize: "3 developers",
-    results: [
-      "400% increase in online donations",
-      "Volunteer sign-ups increased by 250%",
-      "Event attendance improved by 180%",
-      "Community engagement enhanced",
-    ],
-    technologies: [
-      "WordPress",
-      "Donation Plugins",
-      "Event Management",
-      "CRM Integration",
-    ],
-    features: [
-      "Secure donation processing",
-      "Volunteer registration system",
-      "Event calendar and management",
-      "Newsletter subscription",
-      "Social media integration",
-      "Impact reporting dashboard",
-    ],
-    status: "Coming Soon",
-    cta: { label: "View Case Study", href: "/contact" },
-  },
 ];
 
 export default function PortfolioDetailed() {
