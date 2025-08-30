@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/content/site";
 import { Button } from "@/components/ui/button";
+import CalendlyButton from "@/components/CalendlyButton";
 
 type SiteSettings = {
   name?: string;
@@ -58,15 +59,13 @@ export default function Hero({ site }: { site?: SiteSettings }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Button
-                  asChild
+                <CalendlyButton
+                  label={SITE.ctas.primary.label}
                   variant="primary"
                   size="lg"
-                  className="text-base px-8 py-3"
                   withRipple
-                >
-                  <Link href={primary.href}>{primary.label}</Link>
-                </Button>
+                  className="text-base px-8 py-3"
+                />
                 <Button
                   asChild
                   variant="outline"

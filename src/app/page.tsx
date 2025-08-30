@@ -5,13 +5,14 @@ import Services from "@/components/sections/Services";
 import Portfolio from "@/components/sections/Portfolio";
 import Testimonials from "@/components/sections/Testimonials";
 import Footer from "@/components/layout/Footer";
-import { sanity } from "@/lib/sanity.client";
-import {
-  siteSettingsQuery,
-  servicesQuery,
-  projectsQuery,
-  testimonialsQuery,
-} from "@/lib/sanity.queries";
+import WhyUs from "@/components/sections/WhyUs";
+import FAQ from "@/components/sections/FAQ";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema } from "@/seo/organization";
+import { websiteSchema } from "@/seo/website";
+import { homePageSchema } from "@/seo/homepage";
+import { breadcrumbsSchema } from "@/seo/breadcrumbs";
+
 
 export const metadata = {
   title: "RTR Technologies – WordPress Growth Partner",
@@ -45,13 +46,19 @@ export default async function HomePage() {
 
   return (
     <>
-      <Header site={site} />
-      <Hero site={site} />
+      <JsonLd id="ld-website" data={websiteSchema()} />
+      <JsonLd id="ld-org" data={organizationSchema()} />
+      <JsonLd id="ld-home" data={homePageSchema()} />
+      <JsonLd id="ld-breadcrumbs" data={breadcrumbsSchema([{ name: "Home", url: "/" }])} />
+      <Header />
+      <Hero />
       <About />
-      <Services services={services} />
-      <Portfolio projects={projects} />
-      <Testimonials testimonials={testimonials} />
-      <Footer site={site} />
+      <Services />
+      <WhyUs />
+      <FAQ />
+      <Portfolio />
+      <Testimonials />
+      <Footer />
     </>
   );
 }

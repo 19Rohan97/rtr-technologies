@@ -5,6 +5,7 @@ import { SITE } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import Image from "next/image";
+import CalendlyButton from "@/components/CalendlyButton";
 
 type SiteSettings = {
   ctas?: {
@@ -57,9 +58,7 @@ export default function Header({ site }: { site?: SiteSettings }) {
           <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
             <Link href={secondary.href}>{secondary.label || "Request a Quote"}</Link>
           </Button>
-          <Button asChild variant="primary" size="sm" withRipple>
-            <Link href={primary.href}>{primary.label}</Link>
-          </Button>
+          <CalendlyButton label={SITE.ctas.primary.label} variant="primary" size="sm" withRipple />
         </div>
       </div>
     </header>
