@@ -13,6 +13,7 @@ import { websiteSchema } from "@/seo/website";
 import { homePageSchema } from "@/seo/homepage";
 import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 
+
 export const metadata = {
   title: "RTR Technologies – WordPress Growth Partner",
   description:
@@ -33,7 +34,16 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const [site, services, projects, testimonials] = await Promise.all([
+    sanity.fetch(siteSettingsQuery),
+    sanity.fetch(servicesQuery),
+    sanity.fetch(projectsQuery),
+    sanity.fetch(testimonialsQuery),
+  ]);
+
   return (
     <>
       <JsonLd id="ld-website" data={websiteSchema()} />

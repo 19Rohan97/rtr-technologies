@@ -2,7 +2,10 @@
 
 import { motion } from "framer-motion";
 import { FolderOpen } from "lucide-react";
-import { projects } from "@/content/projects";
+import { projects as fallbackProjects } from "@/content/projects";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -27,7 +30,18 @@ const itemVariants = {
   },
 };
 
-export default function Portfolio() {
+type ProjectItem = {
+  _id?: string;
+  title: string;
+  blurb?: string;
+  tags?: string[];
+  comingSoon?: boolean;
+  image?: string | null;
+  linkUrl?: string | null;
+};
+
+export default function Portfolio({ projects }: { projects?: ProjectItem[] }) {
+  const data: ProjectItem[] = projects?.length ? projects : (fallbackProjects as ProjectItem[]);
   return (
     <section id="portfolio" className="py-16 md:py-24 relative overflow-hidden">
       {/* Background Elements */}
@@ -80,36 +94,60 @@ export default function Portfolio() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {projects.map((p, index) => (
+          {data.map((p, index) => (
             <motion.div
               key={p.title}
               variants={itemVariants}
               whileHover={{ y: -10 }}
               className="rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              {/* Placeholder thumbnail */}
-              <div className="aspect-[16/9] rounded-xl bg-gradient-to-br from-yellow-100 via-gray-100 to-yellow-50 dark:from-yellow-900/20 dark:via-gray-800 dark:to-yellow-900/10 mb-4" />
+              <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-yellow-100 via-gray-100 to-yellow-50 dark:from-yellow-900/20 dark:via-gray-800 dark:to-yellow-900/10">
+                {p.image && (
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    unoptimized
+                  />
+                )}
+              </div>
               <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">
                 {p.title}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                {p.blurb}
-              </p>
+              {p.blurb && (
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                  {p.blurb}
+                </p>
+              )}
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {p.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="text-xs rounded-full border border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 px-2 py-1"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
+              {p.tags && (
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {p.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs rounded-full border border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 px-2 py-1"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               {p.comingSoon && (
                 <div className="inline-flex items-center rounded-md bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-3 py-1 text-xs font-medium">
                   Coming Soon
+                </div>
+              )}
+
+              {p.linkUrl && (
+                <div className="mt-4">
+                  <Button asChild variant="outline" size="sm" withRipple>
+                    <Link href={p.linkUrl} target="_blank" rel="noopener noreferrer">
+                      Visit
+                    </Link>
+                  </Button>
                 </div>
               )}
             </motion.div>

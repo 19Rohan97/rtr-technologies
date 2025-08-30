@@ -10,7 +10,11 @@ import { faqs } from "@/content/faqs";
 import FAQ from "@/components/sections/FAQ";
 import WhyUs from "@/components/sections/WhyUs";
 
-export default function ServicesPage() {
+
+export const revalidate = 60;
+
+export default async function ServicesPage() {
+  const site = await sanity.fetch(siteSettingsQuery);
   return (
     <>
       <JsonLd id="ld-services" data={servicesSchema()} />
@@ -23,6 +27,7 @@ export default function ServicesPage() {
       />
       <JsonLd id="ld-faq" data={faqSchema(faqs)} />
       <Header />
+
       <PageBanner
         title="Our Services"
         description="Smart solutions designed to help your business thrive online. From custom WordPress development to ongoing support, we provide comprehensive digital solutions."

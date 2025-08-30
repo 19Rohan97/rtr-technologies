@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.rtr-technologies.com
+
+# Sitemaps
+Sitemap: https://www.rtr-technologies.com/sitemap.xml

@@ -6,7 +6,11 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { portfolioSchema } from "@/seo/portfolio";
 
-export default function PortfolioPage() {
+
+export const revalidate = 60;
+
+export default async function PortfolioPage() {
+  const site = await sanity.fetch(siteSettingsQuery);
   return (
     <>
       <JsonLd id="ld-portfolio" data={portfolioSchema()} />
@@ -18,13 +22,14 @@ export default function PortfolioPage() {
         ])}
       />
       <Header />
+
       <PageBanner
         title="Our Portfolio"
         description="Here's a glimpse of projects we've crafted with passion and precision. Each project represents our commitment to delivering exceptional digital experiences that drive real business results."
         breadcrumbs={[{ label: "Portfolio" }]}
       />
       <PortfolioDetailed />
-      <Footer />
+      <Footer site={site} />
     </>
   );
 }
