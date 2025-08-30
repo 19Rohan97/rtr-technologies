@@ -4,6 +4,7 @@ export const SITE = {
   description:
     "We design, build, and optimize WordPress websites powered by SEO and analytics.",
   email: "connect@rtr-technologies.com",
+  phone: "+1 431 726 1578",
   social: {
     linkedin: "#",
     instagram: "#",
