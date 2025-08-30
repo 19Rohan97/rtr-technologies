@@ -12,9 +12,6 @@
   "dependencies": {
     "@portabletext/react": "^4.0.2",
     "@radix-ui/react-slot": "^1.2.3",
-    "@sanity/client": "^7.10.0",
-    "@sanity/image-url": "^1.2.0",
-    "@sanity/vision": "^4.6.0",
     "@types/react-google-recaptcha": "^2.1.9",
     "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
@@ -22,14 +19,12 @@
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.539.0",
     "next": "15.4.6",
-    "next-sanity": "^10.0.15",
     "next-sitemap": "^4.2.3",
     "react": "19.1.0",
     "react-calendly": "^4.4.0",
     "react-dom": "19.1.0",
     "react-google-recaptcha": "^3.1.0",
     "resend": "^6.0.1",
-    "sanity": "^4.6.0",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
