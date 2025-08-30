@@ -1,10 +1,10 @@
 import "./globals.css";
-import { VercelAnalytics } from "@vercel/analytics/next";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 import { Suspense } from "react";
-import Analytics from "@/components/Analytics";
+import GAAnalytics from "@/components/Analytics";
 import { ThemeProvider } from "@/components/theme-provider";
 import MobileNav from "@/components/layout/MobileNav";
 
@@ -55,14 +55,14 @@ export default function RootLayout({
                 dangerouslySetInnerHTML={{
                   __html: `
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag(){dataLayer.push(arguments);} 
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
           `,
                 }}
               />
               <Suspense fallback={null}>
-                <Analytics id={GA_ID} />
+                <GAAnalytics id={GA_ID} />
               </Suspense>
             </>
           )}
