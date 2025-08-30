@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next";
+import { VercelAnalytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
@@ -67,7 +67,7 @@ export default function RootLayout({
             </>
           )}
           {children}
-          <Analytics />
+          <VercelAnalytics />
           {/* Mobile bottom navigation */}
           <MobileNav />
         </ThemeProvider>
