@@ -20,11 +20,6 @@ const reasons = [
     icon: TrendingUp,
   },
   {
-    title: "Reliable & Secure",
-    desc: "Best-in-class security practices and dependable hosting setups.",
-    icon: Shield,
-  },
-  {
     title: "Fast Delivery",
     desc: "Efficient, transparent workflow to launch on time and iterate quickly.",
     icon: Zap,
@@ -41,7 +36,11 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" as const },
+  },
 };
 
 function FeatureCard({
@@ -99,7 +98,8 @@ export default function WhyUs() {
             Your Growth Partner
           </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            We combine modern engineering with an SEO-driven mindset to build sites that look great and drive results.
+            We combine modern engineering with an SEO-driven mindset to build
+            sites that look great and drive results.
           </p>
         </motion.div>
 
@@ -111,7 +111,12 @@ export default function WhyUs() {
           className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4"
         >
           {reasons.map((r) => (
-            <FeatureCard key={r.title} title={r.title} desc={r.desc} Icon={r.icon} />
+            <FeatureCard
+              key={r.title}
+              title={r.title}
+              desc={r.desc}
+              Icon={r.icon}
+            />
           ))}
         </motion.div>
       </div>
