@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
@@ -68,6 +69,7 @@ export default function RootLayout({
           )}
           {children}
           <VercelAnalytics />
+          <SpeedInsights/>
           <MobileNav />
         </ThemeProvider>
       </body>
