@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   title: "RTR Technologies – WordPress Growth Partner",
   description:
     "We design, build, and optimize WordPress websites powered by SEO and analytics.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
