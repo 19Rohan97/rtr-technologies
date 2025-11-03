@@ -32,65 +32,145 @@ const detailedServices = [
   {
     title: "Custom WordPress Development",
     description:
-      "We create bespoke WordPress websites that are not just visually stunning but also technically robust. Our development process focuses on scalability, security, and performance optimization.",
+      "Bespoke WordPress ecosystems engineered for performance, security, and growth. We translate complex requirements into modular builds that scale with your roadmap.",
     features: [
-      "Custom theme development from scratch",
-      "Plugin development and customization",
-      "Performance optimization and caching",
-      "Security hardening and maintenance",
-      "Mobile-responsive design",
-      "SEO-friendly code structure",
+      "Custom theme architecture and headless builds",
+      "Advanced plugin development and integrations",
+      "Speed optimization and Core Web Vitals compliance",
+      "Hardened security and uptime monitoring",
+      "UX research and conversion-minded design",
+      "Migration support from legacy platforms",
     ],
     illustration: "🎨",
     price: "Starting from $2,500",
     cta: { label: "Get a Quote", href: "/contact" },
   },
   {
+    title: "AI & Generative SEO",
+    description:
+      "Stay visible inside Google SGE, ChatGPT answers, and Perplexity snapshots with content engineered for AI surfaces. We combine schema, topical depth, and experimentation to future-proof rankings.",
+    features: [
+      "Generative engine optimization (GEO) roadmaps",
+      "Entity mapping and topical authority clusters",
+      "Structured data and content enrichment",
+      "AI results monitoring and reporting",
+      "Content refresh plans for SGE snippets",
+      "Training for in-house teams on AI prompts",
+    ],
+    illustration: "✨",
+    price: "Custom programs",
+    cta: { label: "See AI SEO Playbook", href: "/services/ai-seo" },
+  },
+  {
     title: "SEO-Driven Web Design",
     description:
-      "Our design approach prioritizes both aesthetics and search engine visibility. Every design decision is made with user experience and SEO performance in mind.",
+      "Design systems that balance aesthetics with sustainable organic growth. Every component ships with strategic content hierarchy, accessibility, and measurement baked in.",
     features: [
-      "SEO-optimized site architecture",
-      "Core Web Vitals optimization",
-      "Schema markup implementation",
-      "Local SEO setup",
-      "Content strategy development",
-      "Conversion rate optimization",
+      "SEO architecture and internal linking plans",
+      "Wireframes aligned to keyword intent",
+      "Component libraries for rapid growth",
+      "On-page optimization at launch",
+      "Conversion-focused copywriting",
+      "Launch checklists and QA",
     ],
     illustration: "🚀",
     price: "Starting from $1,800",
-    cta: { label: "Learn More", href: "/contact" },
+    cta: { label: "Explore SEO Services", href: "/services/seo" },
+  },
+  {
+    title: "Paid Media & PPC Management",
+    description:
+      "High-intent campaigns across Google Ads and paid social that accelerate pipeline while SEO compounds. We obsess over CPC efficiency and real revenue metrics.",
+    features: [
+      "Keyword research and audience planning",
+      "Landing page design and testing",
+      "Full-funnel conversion tracking",
+      "Bid strategy and budget optimization",
+      "Creative and copy experimentation",
+      "Weekly reporting with actionable next steps",
+    ],
+    illustration: "💡",
+    price: "Budgets from $1,500+/month",
+    cta: { label: "View PPC Programs", href: "/services/ppc" },
+  },
+  {
+    title: "Content Marketing Studio",
+    description:
+      "Editorial engines that earn rankings, trust, and nurture sequences. We plan, produce, and repurpose across blogs, guides, email, and video.",
+    features: [
+      "Editorial calendars tied to buyer stages",
+      "Thought leadership and ghostwriting",
+      "SEO briefs and optimization frameworks",
+      "Long-form assets and gated resources",
+      "Content repurposing across channels",
+      "Enablement for sales and customer success",
+    ],
+    illustration: "📝",
+    price: "Retainers from $2,000/month",
+    cta: { label: "Plan Your Content", href: "/services/content-marketing" },
+  },
+  {
+    title: "Social Media Acceleration",
+    description:
+      "Community-first social strategies that amplify launches and generate demand. We blend storytelling with data to keep engagement climbing.",
+    features: [
+      "Channel strategy and playbooks",
+      "Content pillars and asset creation",
+      "Paid amplification and retargeting",
+      "Influencer and partner activations",
+      "Social listening and sentiment analysis",
+      "Monthly performance retrospectives",
+    ],
+    illustration: "📣",
+    price: "Custom monthly engagements",
+    cta: { label: "Scale Social Reach", href: "/services/social-media" },
+  },
+  {
+    title: "Conversion Rate Optimization",
+    description:
+      "Marry analytics with testing to unlock revenue from existing traffic. CRO sprints prioritize fast wins without sacrificing long-term learnings.",
+    features: [
+      "Quantitative and qualitative research",
+      "Journey and funnel diagnostics",
+      "Experiment roadmaps and execution",
+      "Heatmaps, session recordings, polling",
+      "Rigorous experiment analysis",
+      "Knowledge base for future iterations",
+    ],
+    illustration: "🎯",
+    price: "Project or retainer-based",
+    cta: { label: "Optimize Funnels", href: "/services/conversion-rate-optimization" },
   },
   {
     title: "Google Analytics Setup & Tracking",
     description:
-      "Comprehensive analytics implementation that provides actionable insights into your website performance, user behavior, and business growth opportunities.",
+      "Actionable analytics frameworks built on GA4, Looker, and marketing automation. We connect data points so you can iterate with confidence.",
     features: [
-      "GA4 setup and configuration",
-      "Custom event tracking",
-      "E-commerce tracking setup",
-      "Goal and conversion tracking",
-      "Custom dashboard creation",
-      "Monthly performance reports",
+      "GA4 property setup and audit",
+      "Conversion and event tracking plans",
+      "Data layer and tag implementation",
+      "Attribution modeling and reporting",
+      "Custom dashboards and alerts",
+      "Team training and documentation",
     ],
     illustration: "📊",
-    price: "Starting from $800",
+    price: "Projects from $800",
     cta: { label: "Book Consultation", href: "/contact" },
   },
   {
     title: "Ongoing Support & Growth Plans",
     description:
-      "Continuous website maintenance, security updates, and growth-focused optimizations to ensure your website evolves with your business needs.",
+      "Embedded partnership ensuring your WordPress stack and marketing engine evolve every sprint. We become your proactive digital growth team.",
     features: [
-      "Regular security updates",
-      "Performance monitoring",
-      "Content updates and additions",
-      "SEO improvements and audits",
-      "Technical support and troubleshooting",
-      "Growth strategy consultations",
+      "Monthly technical maintenance",
+      "Growth experiment backlog",
+      "SEO and content performance reviews",
+      "Security monitoring and remediation",
+      "Dedicated success manager",
+      "Quarterly roadmap workshops",
     ],
     illustration: "🛡️",
-    price: "Starting from $300/month",
+    price: "Retainers from $300/month",
     cta: { label: "View Plans", href: "/contact" },
   },
 ];
@@ -106,7 +186,7 @@ export default function ServicesDetailed() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid gap-8 md:grid-cols-2"
         >
-          {detailedServices.map((service, index) => (
+          {detailedServices.map((service) => (
             <motion.div
               key={service.title}
               variants={itemVariants}

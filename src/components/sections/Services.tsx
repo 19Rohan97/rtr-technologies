@@ -3,11 +3,14 @@
 import { motion } from "framer-motion";
 import {
   Briefcase,
-  Zap,
+  Sparkles,
   Code,
   Search,
   BarChart3,
   TrendingUp,
+  PenSquare,
+  Share2,
+  Target,
 } from "lucide-react";
 import { services as fallbackServices } from "@/content/services";
 import Link from "next/link";
@@ -19,6 +22,10 @@ const iconMap = {
   Search,
   BarChart3,
   TrendingUp,
+  Sparkles,
+  PenSquare,
+  Share2,
+  Target,
 };
 
 const containerVariants = {
@@ -107,8 +114,9 @@ export default function Services({ services }: { services?: ServiceItem[] }) {
           viewport={{ once: true, margin: "-50px" }}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {data.map((s, index) => {
-            const IconComponent = iconMap[s.icon as keyof typeof iconMap];
+          {data.map((s) => {
+            const IconComponent =
+              iconMap[s.icon as keyof typeof iconMap] ?? Briefcase;
             return (
               <motion.div
                 key={s.title}
