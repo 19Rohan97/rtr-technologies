@@ -92,8 +92,10 @@ type RouteParams = {
   };
 };
 
-export async function GET(_req: Request, context: RouteParams) {
-  const slug = context.params.slug ?? "home";
+export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const segments = url.pathname.split("/").filter(Boolean);
+  const slug = segments.pop() ?? "home";
   const theme = getTheme(slug);
 
   const accent = theme.accent ?? "#FCD34D";
