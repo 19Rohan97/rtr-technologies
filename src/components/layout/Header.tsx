@@ -19,6 +19,7 @@ type SiteSettings = {
 const nav = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
+  { href: "/blog", label: "Insights" },
   { href: "/contact", label: "Contact" },
 ];
 

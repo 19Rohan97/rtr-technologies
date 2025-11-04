@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Briefcase, FolderOpen, Mail } from "lucide-react";
+import { Home, Briefcase, FolderOpen, Mail, BookOpen } from "lucide-react";
 
 type Item = {
   href: string;
@@ -14,6 +14,7 @@ const items: Item[] = [
   { href: "/", label: "Home", icon: Home },
   { href: "/services", label: "Services", icon: Briefcase },
   { href: "/portfolio", label: "Work", icon: FolderOpen },
+  { href: "/blog", label: "Insights", icon: BookOpen },
   { href: "/contact", label: "Contact", icon: Mail },
 ];
 
@@ -58,4 +59,3 @@ export default function MobileNav() {
     </nav>
   );
 }
-

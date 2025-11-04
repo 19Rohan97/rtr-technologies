@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageBanner from "@/components/ui/page-banner";
@@ -8,28 +7,31 @@ import { absUrl } from "@/seo/utils";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Brain, Network, Radar, BarChart3 } from "lucide-react";
 import Link from "next/link";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
 
-export const metadata: Metadata = {
+const aiSeoKeywords = combineKeywords(
+  [
+    "Generative AI SEO",
+    "AI search optimization",
+    "Generative engine optimization",
+    "AI SEO",
+    "Search engine optimization (SEO) services",
+    "Technical SEO & on-page optimization",
+  ],
+  keywordGroups.expansion
+);
+
+export const metadata = buildMetadata({
   title: "AI & Generative SEO | RTR Technologies",
   description:
     "Optimize for Google SGE, ChatGPT, and Perplexity with generative engine optimization, entity management, and experimentation programs.",
-  alternates: { canonical: "/services/ai-seo" },
-  openGraph: {
-    title: "AI & Generative SEO | RTR Technologies",
-    description:
-      "Stay discoverable in AI-driven search results with entity-rich content, SGE testing, and experimentation guided by data.",
-    url: absUrl("/services/ai-seo"),
-    type: "website",
-    images: [{ url: "/rtr-logo.png", width: 1200, height: 630, alt: "RTR Technologies" }],
+  path: "/services/ai-seo",
+  keywords: aiSeoKeywords,
+  image: {
+    url: "/api/og/ai-seo",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "AI & Generative SEO | RTR Technologies",
-    description:
-      "Generative engine optimization programs that future-proof your visibility across AI search platforms.",
-    images: ["/rtr-logo.png"],
-  },
-};
+});
 
 export const revalidate = 60;
 

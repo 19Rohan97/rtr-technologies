@@ -6,6 +6,18 @@ import { ArrowLeft, Compass, Home, LifeBuoy, Sparkles } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import { buildMetadata } from "@/seo/meta";
+
+export const metadata = buildMetadata({
+  title: "Page Not Found | RTR Technologies",
+  description:
+    "The page you’re looking for doesn’t exist. Explore RTR Technologies’ services, portfolio, or contact our team.",
+  path: "/404",
+  image: {
+    url: "/api/og/services",
+  },
+  noIndex: true,
+});
 
 export default function NotFound() {
   return (

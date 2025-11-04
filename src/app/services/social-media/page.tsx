@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageBanner from "@/components/ui/page-banner";
@@ -8,28 +7,30 @@ import { absUrl } from "@/seo/utils";
 import { Button } from "@/components/ui/button";
 import { Share2, Users, MessageCircle, Sparkles, BarChart3 } from "lucide-react";
 import Link from "next/link";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
 
-export const metadata: Metadata = {
+const socialKeywords = combineKeywords(
+  [
+    "Social media management",
+    "Content marketing services",
+    "Digital marketing agency",
+    "Lead generation & sales funnels",
+    "Marketing automation",
+  ],
+  keywordGroups.expansion
+);
+
+export const metadata = buildMetadata({
   title: "Social Media Management | RTR Technologies",
   description:
     "Grow community, launch campaigns, and turn followers into customers with strategic social media programs.",
-  alternates: { canonical: "/services/social-media" },
-  openGraph: {
-    title: "Social Media Management | RTR Technologies",
-    description:
-      "Channel strategies, content production, and paid amplification that keeps your brand front and center.",
-    url: absUrl("/services/social-media"),
-    type: "website",
-    images: [{ url: "/rtr-logo.png", width: 1200, height: 630, alt: "RTR Technologies" }],
+  path: "/services/social-media",
+  keywords: socialKeywords,
+  image: {
+    url: "/api/og/social-media",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Social Media Management | RTR Technologies",
-    description:
-      "Full-service social campaigns with analytics, community management, and amplification.",
-    images: ["/rtr-logo.png"],
-  },
-};
+});
 
 export const revalidate = 60;
 

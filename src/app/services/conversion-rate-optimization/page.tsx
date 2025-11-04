@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageBanner from "@/components/ui/page-banner";
@@ -8,28 +7,31 @@ import { absUrl } from "@/seo/utils";
 import { Button } from "@/components/ui/button";
 import { GaugeCircle, ClipboardList, FlaskRound, BrainCircuit, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
 
-export const metadata: Metadata = {
+const croKeywords = combineKeywords(
+  [
+    "Conversion rate optimization (CRO)",
+    "Landing page design",
+    "Lead generation & sales funnels",
+    "Website performance optimization",
+    "Marketing automation",
+  ],
+  keywordGroups.expansion,
+  keywordGroups.foundational
+);
+
+export const metadata = buildMetadata({
   title: "Conversion Rate Optimization | RTR Technologies",
   description:
     "Increase revenue from existing traffic with research-driven CRO programs, experimentation, and analytics.",
-  alternates: { canonical: "/services/conversion-rate-optimization" },
-  openGraph: {
-    title: "Conversion Rate Optimization | RTR Technologies",
-    description:
-      "Research, experimentation, and insights that turn more visitors into qualified leads and customers.",
-    url: absUrl("/services/conversion-rate-optimization"),
-    type: "website",
-    images: [{ url: "/rtr-logo.png", width: 1200, height: 630, alt: "RTR Technologies" }],
+  path: "/services/conversion-rate-optimization",
+  keywords: croKeywords,
+  image: {
+    url: "/api/og/conversion-rate-optimization",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Conversion Rate Optimization | RTR Technologies",
-    description:
-      "Full-funnel diagnostics, testing roadmaps, and measurement that compound growth.",
-    images: ["/rtr-logo.png"],
-  },
-};
+});
 
 export const revalidate = 60;
 

@@ -9,6 +9,24 @@ import { faqSchema } from "@/seo/faq";
 import { faqs } from "@/content/faqs";
 import FAQ from "@/components/sections/FAQ";
 import WhyUs from "@/components/sections/WhyUs";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
+
+const servicesKeywords = combineKeywords(
+  keywordGroups.foundational,
+  keywordGroups.expansion
+);
+
+export const metadata = buildMetadata({
+  title: "Services | RTR Technologies",
+  description:
+    "Explore RTR Technologies’ full suite of WordPress development, SEO, PPC, content, and optimization programs built for growth.",
+  path: "/services",
+  keywords: servicesKeywords,
+  image: {
+    url: "/api/og/services",
+  },
+});
 
 
 export const revalidate = 60;

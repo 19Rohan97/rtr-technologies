@@ -41,7 +41,7 @@ export default function Hero({ site }: { site?: SiteSettings }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                {site?.tagline || site?.name || SITE.tagline}
+                WordPress Development, SEO, and PPC for High-Growth Teams
               </motion.h1>
 
               <motion.p
@@ -50,7 +50,7 @@ export default function Hero({ site }: { site?: SiteSettings }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                {site?.description ?? SITE.description}
+                We build custom WordPress experiences that ship fast, convert qualified traffic, and scale with your roadmap. From technical SEO and generative AI visibility to Google Ads management and GA4 analytics, RTR Technologies keeps your growth engine compounding.
               </motion.p>
 
               <motion.div

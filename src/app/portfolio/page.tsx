@@ -5,6 +5,29 @@ import PortfolioDetailed from "@/components/sections/PortfolioDetailed";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { portfolioSchema } from "@/seo/portfolio";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
+
+const portfolioKeywords = combineKeywords(
+  [
+    "WordPress agency portfolio",
+    "WordPress development case studies",
+    "SEO-driven web design examples",
+    "Digital marketing success stories",
+  ],
+  keywordGroups.foundational
+);
+
+export const metadata = buildMetadata({
+  title: "Portfolio | RTR Technologies WordPress Case Studies",
+  description:
+    "Explore RTR Technologies projects that combine custom WordPress development, SEO strategy, and analytics to drive measurable growth.",
+  path: "/portfolio",
+  keywords: portfolioKeywords,
+  image: {
+    url: "/api/og/portfolio",
+  },
+});
 
 
 export const revalidate = 60;

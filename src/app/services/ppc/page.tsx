@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageBanner from "@/components/ui/page-banner";
@@ -8,28 +7,31 @@ import { absUrl } from "@/seo/utils";
 import { Button } from "@/components/ui/button";
 import { Megaphone, BarChart3, GaugeCircle, Target, LineChart } from "lucide-react";
 import Link from "next/link";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
 
-export const metadata: Metadata = {
+const ppcKeywords = combineKeywords(
+  [
+    "Pay-per-click (PPC) management",
+    "Google Ads management",
+    "Digital marketing agency",
+    "Conversion rate optimization (CRO)",
+    "Lead generation & sales funnels",
+    "Landing page design",
+  ],
+  keywordGroups.expansion
+);
+
+export const metadata = buildMetadata({
   title: "Paid Media & PPC Management | RTR Technologies",
   description:
     "Launch and scale profitable PPC campaigns across Google Ads and paid social with conversion tracking, CRO, and reporting built in.",
-  alternates: { canonical: "/services/ppc" },
-  openGraph: {
-    title: "Paid Media & PPC Management | RTR Technologies",
-    description:
-      "Performance-driven PPC programs pairing creative testing with analytics so every dollar fuels pipeline.",
-    url: absUrl("/services/ppc"),
-    type: "website",
-    images: [{ url: "/rtr-logo.png", width: 1200, height: 630, alt: "RTR Technologies" }],
+  path: "/services/ppc",
+  keywords: ppcKeywords,
+  image: {
+    url: "/api/og/ppc",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Paid Media & PPC Management | RTR Technologies",
-    description:
-      "Google Ads and paid social strategies engineered for visibility, conversions, and ongoing optimization.",
-    images: ["/rtr-logo.png"],
-  },
-};
+});
 
 export const revalidate = 60;
 

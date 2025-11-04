@@ -7,6 +7,29 @@ import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { contactPageSchema } from "@/seo/contact";
 import ContactForm from "@/components/sections/ContactForm";
 import { SITE } from "@/content/site";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
+
+const contactKeywords = combineKeywords(
+  [
+    "WordPress agency contact",
+    "WordPress development consultation",
+    "Digital marketing agency contact",
+    "SEO consultation",
+  ],
+  keywordGroups.foundational
+);
+
+export const metadata = buildMetadata({
+  title: "Contact RTR Technologies | Start Your WordPress Growth Project",
+  description:
+    "Ready to launch or optimize your WordPress experience? Connect with RTR Technologies for development, SEO, PPC, and analytics support.",
+  path: "/contact",
+  keywords: contactKeywords,
+  image: {
+    url: "/api/og/contact",
+  },
+});
 
 export const revalidate = 60;
 

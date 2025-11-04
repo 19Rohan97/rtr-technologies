@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageBanner from "@/components/ui/page-banner";
@@ -8,28 +7,32 @@ import { absUrl } from "@/seo/utils";
 import { Button } from "@/components/ui/button";
 import { Search, Target, BarChart3, Layers } from "lucide-react";
 import Link from "next/link";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
 
-export const metadata: Metadata = {
+const seoKeywords = combineKeywords(
+  [
+    "Search engine optimization (SEO) services",
+    "Technical SEO & on-page optimization",
+    "Generative AI SEO",
+    "AI search optimization",
+    "Generative engine optimization",
+    "SEO-driven web design",
+    "Website performance optimization",
+  ],
+  keywordGroups.foundational
+);
+
+export const metadata = buildMetadata({
   title: "SEO Services | RTR Technologies",
   description:
     "Win sustainable search visibility with technical SEO, content strategy, and conversion-focused measurement designed for ambitious WordPress brands.",
-  alternates: { canonical: "/services/seo" },
-  openGraph: {
-    title: "SEO Services | RTR Technologies",
-    description:
-      "Win sustainable search visibility with technical SEO, content strategy, and conversion-focused measurement designed for ambitious WordPress brands.",
-    url: absUrl("/services/seo"),
-    type: "website",
-    images: [{ url: "/rtr-logo.png", width: 1200, height: 630, alt: "RTR Technologies" }],
+  path: "/services/seo",
+  keywords: seoKeywords,
+  image: {
+    url: "/api/og/seo",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "SEO Services | RTR Technologies",
-    description:
-      "Technical SEO, content strategy, and conversion tracking that compound results month after month.",
-    images: ["/rtr-logo.png"],
-  },
-};
+});
 
 export const revalidate = 60;
 

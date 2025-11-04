@@ -8,9 +8,8 @@ import {
   Target,
   TrendingUp,
   Award,
+  BarChart3,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 const stats = [
   { number: "50+", label: "Projects Delivered", icon: CheckCircle },
@@ -22,18 +21,27 @@ const stats = [
 const values = [
   {
     icon: Zap,
-    title: "Performance First",
-    description: "Lightning-fast websites that convert visitors into customers",
+    title: "AI & Technical SEO",
+    description:
+      "Structured data, Core Web Vitals, and SGE-ready content that keep you visible in generative and traditional search.",
   },
   {
     icon: Target,
-    title: "SEO Driven",
-    description: "Every line of code optimized for search engine visibility",
+    title: "Custom WordPress Engineering",
+    description:
+      "Headless architecture, reusable design systems, and performance tuning tailored to your funnel.",
   },
   {
     icon: TrendingUp,
-    title: "Growth Focused",
-    description: "We don't just build websites, we build growth engines",
+    title: "Full-Funnel Growth Programs",
+    description:
+      "Integrated SEO, PPC management, and conversion rate optimization aligned to revenue targets.",
+  },
+  {
+    icon: BarChart3,
+    title: "Measurement That Matters",
+    description:
+      "GA4 dashboards, event tracking, and marketing automation that translate traffic into insights and action.",
   },
 ];
 
@@ -144,22 +152,21 @@ export default function About() {
               variants={itemVariants}
               className="text-lg md:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-8"
             >
-              RTR Technologies is your digital growth partner, specializing in
-              WordPress development, SEO optimization, and analytics
-              integration. We combine technical expertise with strategic
-              thinking to create websites that don&apos;t just look great—they
-              drive real business results.
+              RTR Technologies is a WordPress development company built for
+              growth-minded teams. We blend custom WordPress engineering with
+              technical SEO, generative AI visibility, paid media strategy, and
+              content operations so your site attracts qualified traffic and
+              turns it into pipeline.
             </motion.p>
 
             <motion.p
               variants={itemVariants}
               className="text-base text-gray-600 dark:text-gray-300 leading-relaxed"
             >
-              Our approach goes beyond traditional web development. We focus on
-              creating digital experiences that not only represent your brand
-              beautifully but also serve as powerful tools for business growth,
-              customer engagement, and long-term success in the digital
-              landscape.
+              Every engagement includes CRO experimentation, GA4 analytics
+              instrumentation, and proactive WordPress maintenance. The result:
+              a scalable digital ecosystem that keeps performance, storytelling,
+              and lead generation in lockstep as your goals evolve.
             </motion.p>
           </motion.div>
         </motion.div>

@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageBanner from "@/components/ui/page-banner";
@@ -8,28 +7,31 @@ import { absUrl } from "@/seo/utils";
 import { Button } from "@/components/ui/button";
 import { PenSquare, FileText, Layers, Share2, BarChart3 } from "lucide-react";
 import Link from "next/link";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
 
-export const metadata: Metadata = {
+const contentKeywords = combineKeywords(
+  [
+    "Content marketing services",
+    "Lead generation & sales funnels",
+    "Marketing automation",
+    "Digital marketing agency",
+    "SEO-driven web design",
+  ],
+  keywordGroups.expansion,
+  keywordGroups.foundational
+);
+
+export const metadata = buildMetadata({
   title: "Content Marketing Services | RTR Technologies",
   description:
     "Build a content engine that attracts, nurtures, and converts. Strategy, production, and distribution tailored to growth-focused teams.",
-  alternates: { canonical: "/services/content-marketing" },
-  openGraph: {
-    title: "Content Marketing Services | RTR Technologies",
-    description:
-      "Editorial strategy, SEO content, and multimedia assets crafted to earn authority and accelerate demand.",
-    url: absUrl("/services/content-marketing"),
-    type: "website",
-    images: [{ url: "/rtr-logo.png", width: 1200, height: 630, alt: "RTR Technologies" }],
+  path: "/services/content-marketing",
+  keywords: contentKeywords,
+  image: {
+    url: "/api/og/content-marketing",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Content Marketing Services | RTR Technologies",
-    description:
-      "Strategy, storytelling, and distribution frameworks that fuel pipeline and retention.",
-    images: ["/rtr-logo.png"],
-  },
-};
+});
 
 export const revalidate = 60;
 

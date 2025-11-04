@@ -12,27 +12,28 @@ import { organizationSchema } from "@/seo/organization";
 import { websiteSchema } from "@/seo/website";
 import { homePageSchema } from "@/seo/homepage";
 import { breadcrumbsSchema } from "@/seo/breadcrumbs";
+import { buildMetadata, combineKeywords } from "@/seo/meta";
+import { keywordGroups } from "@/seo/keyword-groups";
 
+const homeKeywords = combineKeywords(
+  keywordGroups.foundational,
+  [
+    "WordPress growth partner",
+    "WordPress development Toronto",
+    "Digital marketing agency",
+  ]
+);
 
-export const metadata = {
+export const metadata = buildMetadata({
   title: "RTR Technologies – WordPress Growth Partner",
   description:
-    "We design, build, and optimize custom WordPress websites powered by SEO and analytics.",
-  openGraph: {
-    title: "RTR Technologies – WordPress Growth Partner",
-    description:
-      "WordPress websites that drive growth. SEO, design, GA4 tracking.",
-    url: "https://rtr-technologies.com",
-    siteName: "RTR Technologies",
-    type: "website",
+    "We design, build, and optimize custom WordPress websites powered by SEO, PPC, and analytics for ambitious teams.",
+  path: "/",
+  keywords: homeKeywords,
+  image: {
+    url: "/api/og/home",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "RTR Technologies – WordPress Growth Partner",
-    description:
-      "WordPress websites that drive growth. SEO, design, GA4 tracking.",
-  },
-};
+});
 
 export const revalidate = 60;
 
