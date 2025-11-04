@@ -27,9 +27,6 @@ export const metadata = buildMetadata({
     "Grow community, launch campaigns, and turn followers into customers with strategic social media programs.",
   path: "/services/social-media",
   keywords: socialKeywords,
-  image: {
-    url: "/api/og/social-media",
-  },
 });
 
 export const revalidate = 60;

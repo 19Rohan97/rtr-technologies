@@ -13,9 +13,6 @@ export const metadata = buildMetadata({
   description:
     "The page you’re looking for doesn’t exist. Explore RTR Technologies’ services, portfolio, or contact our team.",
   path: "/404",
-  image: {
-    url: "/api/og/services",
-  },
   noIndex: true,
 });
 

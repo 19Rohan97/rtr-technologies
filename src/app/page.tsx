@@ -30,9 +30,6 @@ export const metadata = buildMetadata({
     "We design, build, and optimize custom WordPress websites powered by SEO, PPC, and analytics for ambitious teams.",
   path: "/",
   keywords: homeKeywords,
-  image: {
-    url: "/api/og/home",
-  },
 });
 
 export const revalidate = 60;

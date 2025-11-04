@@ -28,9 +28,6 @@ export const metadata = buildMetadata({
     "Build a content engine that attracts, nurtures, and converts. Strategy, production, and distribution tailored to growth-focused teams.",
   path: "/services/content-marketing",
   keywords: contentKeywords,
-  image: {
-    url: "/api/og/content-marketing",
-  },
 });
 
 export const revalidate = 60;

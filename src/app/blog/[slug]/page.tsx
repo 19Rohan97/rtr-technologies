@@ -29,9 +29,6 @@ export function generateMetadata({ params }: PageProps) {
     description: post.description,
     path: `/blog/${post.slug}`,
     keywords,
-    image: {
-      url: `/api/og/${post.slug}`,
-    },
   });
 }
 
@@ -50,7 +47,7 @@ export default function BlogPostPage({ params }: PageProps) {
           description: post.description,
           slug: post.slug,
           date: post.date,
-          image: `/api/og/${post.slug}`,
+          image: "/og-default.png",
         })}
       />
       <JsonLd

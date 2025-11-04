@@ -29,9 +29,6 @@ export const metadata = buildMetadata({
     "Win sustainable search visibility with technical SEO, content strategy, and conversion-focused measurement designed for ambitious WordPress brands.",
   path: "/services/seo",
   keywords: seoKeywords,
-  image: {
-    url: "/api/og/seo",
-  },
 });
 
 export const revalidate = 60;

@@ -28,9 +28,6 @@ export const metadata = buildMetadata({
     "Optimize for Google SGE, ChatGPT, and Perplexity with generative engine optimization, entity management, and experimentation programs.",
   path: "/services/ai-seo",
   keywords: aiSeoKeywords,
-  image: {
-    url: "/api/og/ai-seo",
-  },
 });
 
 export const revalidate = 60;

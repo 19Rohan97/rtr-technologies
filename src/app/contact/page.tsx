@@ -26,9 +26,6 @@ export const metadata = buildMetadata({
     "Ready to launch or optimize your WordPress experience? Connect with RTR Technologies for development, SEO, PPC, and analytics support.",
   path: "/contact",
   keywords: contactKeywords,
-  image: {
-    url: "/api/og/contact",
-  },
 });
 
 export const revalidate = 60;

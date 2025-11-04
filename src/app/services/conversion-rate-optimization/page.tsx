@@ -28,9 +28,6 @@ export const metadata = buildMetadata({
     "Increase revenue from existing traffic with research-driven CRO programs, experimentation, and analytics.",
   path: "/services/conversion-rate-optimization",
   keywords: croKeywords,
-  image: {
-    url: "/api/og/conversion-rate-optimization",
-  },
 });
 
 export const revalidate = 60;

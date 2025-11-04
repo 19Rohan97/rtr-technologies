@@ -28,9 +28,6 @@ export const metadata = buildMetadata({
     "Actionable guides on WordPress development, AI SEO, PPC strategy, and conversion optimization from the RTR Technologies team.",
   path: "/blog",
   keywords: blogKeywords,
-  image: {
-    url: "/api/og/blog",
-  },
 });
 
 export default function BlogIndexPage() {

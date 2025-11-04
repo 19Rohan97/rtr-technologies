@@ -23,9 +23,6 @@ export const metadata = buildMetadata({
     "Explore RTR Technologies’ full suite of WordPress development, SEO, PPC, content, and optimization programs built for growth.",
   path: "/services",
   keywords: servicesKeywords,
-  image: {
-    url: "/api/og/services",
-  },
 });
 
 

@@ -24,9 +24,6 @@ export const metadata = buildMetadata({
     "Explore RTR Technologies projects that combine custom WordPress development, SEO strategy, and analytics to drive measurable growth.",
   path: "/portfolio",
   keywords: portfolioKeywords,
-  image: {
-    url: "/api/og/portfolio",
-  },
 });
 
 

@@ -28,9 +28,6 @@ export const metadata = buildMetadata({
     "Launch and scale profitable PPC campaigns across Google Ads and paid social with conversion tracking, CRO, and reporting built in.",
   path: "/services/ppc",
   keywords: ppcKeywords,
-  image: {
-    url: "/api/og/ppc",
-  },
 });
 
 export const revalidate = 60;

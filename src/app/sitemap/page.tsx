@@ -25,9 +25,6 @@ export const metadata = buildMetadata({
     "Explore every RTR Technologies page including WordPress services, portfolio projects, insights, and contact routes. XML feed available for Google Search Console.",
   path: "/sitemap",
   keywords: sitemapKeywords,
-  image: {
-    url: "/api/og/sitemap",
-  },
 });
 
 const corePages = [

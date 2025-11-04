@@ -29,7 +29,6 @@ export function articleSchema({ title, description, slug, date, image }: Article
       "@type": "WebPage",
       "@id": absUrl(`/blog/${slug}`),
     },
-    image: [absUrl(image ?? "/api/og/home")],
+    image: [absUrl(image ?? "/og-default.png")],
   };
 }
-

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { absUrl } from "./utils";
 
 const SITE_NAME = "RTR Technologies";
-const DEFAULT_IMAGE_PATH = "/api/og/home";
+const DEFAULT_IMAGE_PATH = "/og-default.png";
 
 type MetadataImage = {
   url: string;
