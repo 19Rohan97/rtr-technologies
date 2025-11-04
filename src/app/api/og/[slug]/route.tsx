@@ -1,5 +1,4 @@
 import { ImageResponse } from "next/og";
-import type { NextRequest } from "next/server";
 import { blogPosts } from "@/content/blog/posts";
 
 export const runtime = "edge";
@@ -87,7 +86,7 @@ function getTheme(slug: string): OgThemeConfig {
   );
 }
 
-export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(_req: Request, { params }: { params: { slug: string } }) {
   const { slug } = params;
   const theme = getTheme(slug);
 
