@@ -86,8 +86,14 @@ function getTheme(slug: string): OgThemeConfig {
   );
 }
 
-export async function GET(_req: Request, context: any) {
-  const slug = context?.params?.slug ?? "home";
+type RouteParams = {
+  params: {
+    slug: string;
+  };
+};
+
+export async function GET(_req: Request, context: RouteParams) {
+  const slug = context.params.slug ?? "home";
   const theme = getTheme(slug);
 
   const accent = theme.accent ?? "#FCD34D";
