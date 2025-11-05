@@ -6,7 +6,9 @@ type SiteInfo = {
   email?: string;
 };
 
-export function contactPageSchema(site: SiteInfo = SITE) {
+export function contactPageSchema(site?: SiteInfo | null) {
+  const siteData = site ?? SITE;
+
   return clean({
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -16,17 +18,17 @@ export function contactPageSchema(site: SiteInfo = SITE) {
       "Get in touch to book a consultation, request a quote, or ask questions about our services.",
     publisher: clean({
       "@type": "Organization",
-      name: site.name ?? SITE.name,
+      name: siteData.name ?? SITE.name,
       url: absUrl("/"),
       logo: absUrl("/rtr-logo.png"),
-      email: site.email ?? SITE.email,
+      email: siteData.email ?? SITE.email,
       contactPoint:
-        site.email ?? SITE.email
+        siteData.email ?? SITE.email
           ? [
               {
                 "@type": "ContactPoint",
                 contactType: "sales",
-                email: site.email ?? SITE.email,
+                email: siteData.email ?? SITE.email,
               },
             ]
           : undefined,
