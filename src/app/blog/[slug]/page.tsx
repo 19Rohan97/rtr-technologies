@@ -10,30 +10,29 @@ import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-type PageProps = {
-  params: { slug: string };
-};
+import type { PageProps } from "./$types";
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: PageProps) {
-  const post = getBlogPostBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
   if (!post) return {};
 
   const keywords = combineKeywords(post.keywords, keywordGroups.foundational, keywordGroups.expansion);
   return buildMetadata({
     title: `${post.title} | RTR Technologies Insights`,
     description: post.description,
-    path: `/blog/${post.slug}`,
+    path: `/blog/${post.slug ?? slug}`,
     keywords,
   });
 }
 
-export default function BlogPostPage({ params }: PageProps) {
-  const post = getBlogPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
   if (!post) {
     notFound();
   }
