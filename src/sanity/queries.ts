@@ -212,12 +212,23 @@ function mapLegacyBlogPost(post: LegacyBlogPost): BlogPost {
   };
 }
 
+const REVALIDATE_SECONDS = 60;
+
+const fetchOptions = { next: { revalidate: REVALIDATE_SECONDS } };
+
 export async function fetchHomeContent(): Promise<HomeContent> {
+  if (!sanityClient) {
+    return {
+      siteSettings: undefined,
+      services: fallbackServices.map(mapLegacyService),
+      faqs: fallbackFaqs.map(mapLegacyFaq),
+      testimonials: fallbackTestimonials.map(mapLegacyTestimonial),
+      projects: fallbackProjects.map(mapLegacyProject),
+    };
+  }
+
   try {
-    if (!sanityClient) {
-      throw new Error("Sanity client not configured");
-    }
-    const data = await sanityClient.fetch<HomeContent>(homeContentQuery, {}, { cache: "no-store" });
+    const data = await sanityClient.fetch<HomeContent>(homeContentQuery, {}, fetchOptions);
     return {
       siteSettings: data.siteSettings ?? undefined,
       services: data.services ?? [],
@@ -238,11 +249,12 @@ export async function fetchHomeContent(): Promise<HomeContent> {
 }
 
 export async function fetchSiteSettings(): Promise<SiteSettings | undefined> {
+  if (!sanityClient) {
+    return undefined;
+  }
+
   try {
-    if (!sanityClient) {
-      throw new Error("Sanity client not configured");
-    }
-    return await sanityClient.fetch<SiteSettings>(siteSettingsQuery);
+    return await sanityClient.fetch<SiteSettings>(siteSettingsQuery, {}, fetchOptions);
   } catch (error) {
     console.warn("Failed to fetch site settings from Sanity.", error);
     return undefined;
@@ -250,11 +262,12 @@ export async function fetchSiteSettings(): Promise<SiteSettings | undefined> {
 }
 
 export async function fetchServices(): Promise<Service[]> {
+  if (!sanityClient) {
+    return fallbackServices.map(mapLegacyService);
+  }
+
   try {
-    if (!sanityClient) {
-      throw new Error("Sanity client not configured");
-    }
-    return (await sanityClient.fetch<Service[]>(servicesQuery)) ?? [];
+    return (await sanityClient.fetch<Service[]>(servicesQuery, {}, fetchOptions)) ?? [];
   } catch (error) {
     console.warn("Failed to fetch services from Sanity.", error);
     return fallbackServices.map(mapLegacyService);
@@ -262,11 +275,12 @@ export async function fetchServices(): Promise<Service[]> {
 }
 
 export async function fetchFaqs(): Promise<FAQ[]> {
+  if (!sanityClient) {
+    return fallbackFaqs.map(mapLegacyFaq);
+  }
+
   try {
-    if (!sanityClient) {
-      throw new Error("Sanity client not configured");
-    }
-    return (await sanityClient.fetch<FAQ[]>(faqsQuery)) ?? [];
+    return (await sanityClient.fetch<FAQ[]>(faqsQuery, {}, fetchOptions)) ?? [];
   } catch (error) {
     console.warn("Failed to fetch FAQs from Sanity.", error);
     return fallbackFaqs.map(mapLegacyFaq);
@@ -274,11 +288,12 @@ export async function fetchFaqs(): Promise<FAQ[]> {
 }
 
 export async function fetchTestimonials(): Promise<Testimonial[]> {
+  if (!sanityClient) {
+    return fallbackTestimonials.map(mapLegacyTestimonial);
+  }
+
   try {
-    if (!sanityClient) {
-      throw new Error("Sanity client not configured");
-    }
-    return (await sanityClient.fetch<Testimonial[]>(testimonialsQuery)) ?? [];
+    return (await sanityClient.fetch<Testimonial[]>(testimonialsQuery, {}, fetchOptions)) ?? [];
   } catch (error) {
     console.warn("Failed to fetch testimonials from Sanity.", error);
     return fallbackTestimonials.map(mapLegacyTestimonial);
@@ -286,11 +301,12 @@ export async function fetchTestimonials(): Promise<Testimonial[]> {
 }
 
 export async function fetchProjects(): Promise<Project[]> {
+  if (!sanityClient) {
+    return fallbackProjects.map(mapLegacyProject);
+  }
+
   try {
-    if (!sanityClient) {
-      throw new Error("Sanity client not configured");
-    }
-    return (await sanityClient.fetch<Project[]>(projectsQuery)) ?? [];
+    return (await sanityClient.fetch<Project[]>(projectsQuery, {}, fetchOptions)) ?? [];
   } catch (error) {
     console.warn("Failed to fetch projects from Sanity.", error);
     return fallbackProjects.map(mapLegacyProject);
@@ -298,11 +314,12 @@ export async function fetchProjects(): Promise<Project[]> {
 }
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
+  if (!sanityClient) {
+    return fallbackBlogPosts.map(mapLegacyBlogPost);
+  }
+
   try {
-    if (!sanityClient) {
-      throw new Error("Sanity client not configured");
-    }
-    const posts = await sanityClient.fetch<BlogPost[]>(blogPostsQuery, {}, { cache: "no-store" });
+    const posts = await sanityClient.fetch<BlogPost[]>(blogPostsQuery, {}, fetchOptions);
     if (!posts?.length) {
       return fallbackBlogPosts.map(mapLegacyBlogPost);
     }
@@ -314,11 +331,17 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function fetchBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  if (!sanityClient) {
+    const legacy = fallbackBlogPosts.find((post) => post.slug === slug);
+    return legacy ? mapLegacyBlogPost(legacy) : null;
+  }
+
   try {
-    if (!sanityClient) {
-      throw new Error("Sanity client not configured");
-    }
-    const post = await sanityClient.fetch<BlogPost | null>(blogPostBySlugQuery, { slug }, { cache: "no-store" });
+    const post = await sanityClient.fetch<BlogPost | null>(
+      blogPostBySlugQuery,
+      { slug },
+      fetchOptions
+    );
     if (post) return post;
   } catch (error) {
     console.warn(`Failed to fetch blog post ${slug} from Sanity.`, error);
