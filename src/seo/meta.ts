@@ -20,7 +20,7 @@ type BuildMetadataOptions = {
   path?: string;
   /** Custom Open Graph overrides */
   openGraph?: Metadata["openGraph"];
-  /** Custom Twitter card overrides */
+  /** Custom Twitter overrides */
   twitter?: Metadata["twitter"];
   /** Optional social image; relative paths will be absolutized */
   image?: MetadataImage;
@@ -73,12 +73,16 @@ export function buildMetadata({
     images: openGraph?.images ?? openGraphDefaults.images,
   };
 
+  const twitterDefaults = {
+    title,
+    description,
+    images: [resolvedImage.url],
+  };
+
   const twitterData: Metadata["twitter"] = {
+    ...twitterDefaults,
     ...twitter,
-    card: twitter?.card ?? "summary_large_image",
-    title: twitter?.title ?? title,
-    description: twitter?.description ?? description,
-    images: twitter?.images ?? [resolvedImage.url],
+    images: twitter?.images ?? twitterDefaults.images,
   };
 
   const canonicalAlternates: Metadata["alternates"] = {
