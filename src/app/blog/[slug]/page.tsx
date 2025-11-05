@@ -10,7 +10,11 @@ import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import type { PageProps } from "./$types";
+type PageParams = Promise<{ slug: string }>;
+
+type PageProps = {
+  params: PageParams;
+};
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));

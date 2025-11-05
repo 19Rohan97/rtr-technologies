@@ -20,10 +20,7 @@ type SiteSettings = {
 };
 
 export default function Hero({ site }: { site?: SiteSettings }) {
-  const primary = {
-    label: site?.ctas?.primaryLabel ?? SITE.ctas.primary.label,
-    href: site?.ctas?.primaryHref ?? SITE.ctas.primary.href,
-  };
+  const primaryLabel = site?.ctas?.primaryLabel ?? SITE.ctas.primary.label;
   const secondary = {
     label: site?.ctas?.secondaryLabel ?? SITE.ctas.secondary.label,
     href: site?.ctas?.secondaryHref ?? SITE.ctas.secondary.href,
@@ -60,7 +57,7 @@ export default function Hero({ site }: { site?: SiteSettings }) {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <CalendlyButton
-                  label={SITE.ctas.primary.label}
+                  label={primaryLabel}
                   variant="primary"
                   size="lg"
                   withRipple

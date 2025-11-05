@@ -1,22 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  CheckCircle,
-  Users,
-  Zap,
-  Target,
-  TrendingUp,
-  Award,
-  BarChart3,
-} from "lucide-react";
-
-const stats = [
-  { number: "50+", label: "Projects Delivered", icon: CheckCircle },
-  { number: "25+", label: "Happy Clients", icon: Users },
-  { number: "3+", label: "Years Experience", icon: Award },
-  { number: "100%", label: "Growth Focused", icon: TrendingUp },
-];
+import { Zap, Target, TrendingUp, BarChart3 } from "lucide-react";
 
 const values = [
   {
@@ -68,18 +53,6 @@ const itemVariants = {
   },
 };
 
-const statsVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const,
-    },
-  },
-};
-
 export default function About() {
   return (
     <section id="about" className="py-16 md:py-24 relative overflow-hidden">
@@ -102,7 +75,7 @@ export default function About() {
             variants={containerVariants}
             className="space-y-6 lg:pr-8"
           >
-            {values.map((value, index) => {
+            {values.map((value) => {
               const IconComponent = value.icon;
               return (
                 <motion.div

@@ -94,7 +94,7 @@ export default function Portfolio({ projects }: { projects?: ProjectItem[] }) {
           viewport={{ once: true, margin: "-50px" }}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {data.map((p, index) => (
+          {data.map((p) => (
             <motion.div
               key={p.title}
               variants={itemVariants}

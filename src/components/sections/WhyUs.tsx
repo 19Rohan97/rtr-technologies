@@ -1,6 +1,6 @@
 "use client";
 
-import { Shield, Zap, TrendingUp, Code, BarChart3 } from "lucide-react";
+import { Zap, TrendingUp, Code, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 
 const reasons = [

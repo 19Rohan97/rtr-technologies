@@ -24,10 +24,7 @@ const nav = [
 ];
 
 export default function Header({ site }: { site?: SiteSettings }) {
-  const primary = {
-    label: site?.ctas?.primaryLabel ?? SITE.ctas.primary.label,
-    href: site?.ctas?.primaryHref ?? SITE.ctas.primary.href,
-  };
+  const primaryLabel = site?.ctas?.primaryLabel ?? SITE.ctas.primary.label;
   const secondary = {
     label: site?.ctas?.secondaryLabel ?? SITE.ctas.secondary.label,
     href: site?.ctas?.secondaryHref ?? SITE.ctas.secondary.href,
@@ -59,7 +56,7 @@ export default function Header({ site }: { site?: SiteSettings }) {
           <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
             <Link href={secondary.href}>{secondary.label || "Request a Quote"}</Link>
           </Button>
-          <CalendlyButton label={SITE.ctas.primary.label} variant="primary" size="sm" withRipple />
+          <CalendlyButton label={primaryLabel} variant="primary" size="sm" withRipple />
         </div>
       </div>
     </header>

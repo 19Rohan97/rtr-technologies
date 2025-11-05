@@ -139,7 +139,7 @@ export default function PortfolioDetailed() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid gap-12 md:grid-cols-2"
         >
-          {detailedProjects.map((project, index) => (
+          {detailedProjects.map((project) => (
             <motion.div
               key={project.title}
               variants={itemVariants}

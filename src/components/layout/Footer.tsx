@@ -49,13 +49,6 @@ const quickLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-const services = [
-  { href: "/services", label: "WordPress Development" },
-  { href: "/services", label: "SEO Optimization" },
-  { href: "/services", label: "Analytics Setup" },
-  { href: "/services", label: "Ongoing Support" },
-];
-
 const features = [
   { icon: Code, text: "Custom Development" },
   { icon: TrendingUp, text: "Growth Focused" },
@@ -176,7 +169,7 @@ export default function Footer({ site }: { site?: SiteSettings }) {
 
             {/* Features Grid */}
             <div className="grid grid-cols-2 gap-3">
-              {features.map((feature, index) => {
+              {features.map((feature) => {
                 const IconComponent = feature.icon;
                 return (
                   <div key={feature.text} className="flex items-center gap-2">
