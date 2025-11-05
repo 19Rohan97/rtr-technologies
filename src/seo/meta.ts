@@ -59,14 +59,18 @@ export function buildMetadata({
   const canonicalUrl = absUrl(path);
   const resolvedImage = normaliseImage(image);
 
+  const openGraphDefaults = {
+    title,
+    description,
+    url: canonicalUrl,
+    siteName: SITE_NAME,
+    images: [resolvedImage],
+  };
+
   const openGraphData: Metadata["openGraph"] = {
+    ...openGraphDefaults,
     ...openGraph,
-    title: openGraph?.title ?? title,
-    description: openGraph?.description ?? description,
-    url: openGraph?.url ?? canonicalUrl,
-    type: openGraph?.type ?? "website",
-    siteName: openGraph?.siteName ?? SITE_NAME,
-    images: openGraph?.images ?? [resolvedImage],
+    images: openGraph?.images ?? openGraphDefaults.images,
   };
 
   const twitterData: Metadata["twitter"] = {
