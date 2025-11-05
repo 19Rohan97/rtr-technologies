@@ -6,9 +6,10 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { contactPageSchema } from "@/seo/contact";
 import ContactForm from "@/components/sections/ContactForm";
-import { SITE } from "@/content/site";
 import { buildMetadata, combineKeywords } from "@/seo/meta";
 import { keywordGroups } from "@/seo/keyword-groups";
+import { fetchSiteSettings } from "@/sanity/queries";
+import { SITE } from "@/content/site";
 
 const contactKeywords = combineKeywords(
   [
@@ -30,13 +31,14 @@ export const metadata = buildMetadata({
 
 export const revalidate = 60;
 
-export default function ContactPage() {
-  const email = SITE.email;
-  const phone = SITE.phone;
+export default async function ContactPage() {
+  const siteSettings = await fetchSiteSettings();
+  const email = siteSettings?.email ?? SITE.email;
+  const phone = siteSettings?.phone ?? SITE.phone;
 
   return (
     <>
-      <JsonLd id="ld-contact" data={contactPageSchema()} />
+      <JsonLd id="ld-contact" data={contactPageSchema(siteSettings)} />
       <JsonLd
         id="ld-breadcrumbs"
         data={breadcrumbsSchema([
@@ -44,7 +46,7 @@ export default function ContactPage() {
           { name: "Contact", url: "/contact" },
         ])}
       />
-      <Header />
+      <Header site={siteSettings} />
       <PageBanner
         title="Contact Us"
         description="Ready to start your project? Tell us a bit about it. We're here to help you transform your digital presence and achieve your business goals."
@@ -205,7 +207,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-      <Footer />
+      <Footer site={siteSettings} />
     </>
   );
 }

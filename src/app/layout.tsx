@@ -2,7 +2,6 @@ import "./globals.css";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import Script from "next/script";
 import { Suspense } from "react";
 import GAAnalytics from "@/components/Analytics";
@@ -10,13 +9,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import MobileNav from "@/components/layout/MobileNav";
 
 const GA_ID = process.env.GA_TRACKING_ID;
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
-  variable: "--font-roboto",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "RTR Technologies – WordPress Growth Partner",
@@ -33,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={roboto.variable}>
+    <html lang="en">
       <body className="min-h-screen bg-background text-foreground antialiased pb-[calc(env(safe-area-inset-bottom)+4rem)] sm:pb-0">
         <ThemeProvider defaultTheme="dark" storageKey="rtr-ui-theme">
           {GA_ID && (

@@ -8,12 +8,17 @@ import Image from "next/image";
 import CalendlyButton from "@/components/CalendlyButton";
 
 type SiteSettings = {
-  ctas?: {
-    primaryLabel?: string;
-    primaryHref?: string;
-    secondaryLabel?: string;
-    secondaryHref?: string;
-  };
+  ctas?:
+    | {
+        primaryLabel?: string;
+        primaryHref?: string;
+        secondaryLabel?: string;
+        secondaryHref?: string;
+      }
+    | {
+        primary?: { label?: string; href?: string };
+        secondary?: { label?: string; href?: string };
+      };
 };
 
 const nav = [
@@ -23,12 +28,34 @@ const nav = [
   { href: "/contact", label: "Contact" },
 ];
 
-export default function Header({ site }: { site?: SiteSettings }) {
-  const primaryLabel = site?.ctas?.primaryLabel ?? SITE.ctas.primary.label;
-  const secondary = {
-    label: site?.ctas?.secondaryLabel ?? SITE.ctas.secondary.label,
-    href: site?.ctas?.secondaryHref ?? SITE.ctas.secondary.href,
+function resolveLabel(ctas: SiteSettings["ctas"], key: "primary" | "secondary", fallback: { label: string; href: string }) {
+  if (!ctas) return fallback;
+  if ("primaryLabel" in ctas || "secondaryLabel" in ctas) {
+    const label = key === "primary" ? ctas.primaryLabel : ctas.secondaryLabel;
+    const href = key === "primary" ? ctas.primaryHref : ctas.secondaryHref;
+    return {
+      label: label ?? fallback.label,
+      href: href ?? fallback.href,
+    };
+  }
+
+  if ("primary" in ctas || "secondary" in ctas) {
+    const node = (ctas as { primary?: { label?: string; href?: string }; secondary?: { label?: string; href?: string } })[key];
+    return {
+      label: node?.label ?? fallback.label,
+      href: node?.href ?? fallback.href,
+    };
+  }
+
+  return {
+    label: fallback.label,
+    href: fallback.href,
   };
+}
+
+export default function Header({ site }: { site?: SiteSettings }) {
+  const primary = resolveLabel(site?.ctas, "primary", SITE.ctas.primary);
+  const secondary = resolveLabel(site?.ctas, "secondary", SITE.ctas.secondary);
   return (
     <header className="sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur border-b dark:border-gray-800">
       <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
@@ -56,7 +83,7 @@ export default function Header({ site }: { site?: SiteSettings }) {
           <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
             <Link href={secondary.href}>{secondary.label || "Request a Quote"}</Link>
           </Button>
-          <CalendlyButton label={primaryLabel} variant="primary" size="sm" withRipple />
+          <CalendlyButton label={primary.label} variant="primary" size="sm" withRipple />
         </div>
       </div>
     </header>

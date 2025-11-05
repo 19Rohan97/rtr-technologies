@@ -54,7 +54,7 @@ const itemVariants = {
 type ServiceItem = {
   _id?: string;
   title: string;
-  desc: string;
+  desc?: string;
   icon: string;
   cta?: { label: string; href: string };
   ctaLabel?: string;
@@ -65,7 +65,12 @@ export default function Services({ services }: { services?: ServiceItem[] }) {
   const data: ServiceItem[] = services?.length
     ? services.map((s) => ({
         ...s,
-        cta: { label: s.ctaLabel ?? "Request a Quote", href: s.ctaHref ?? "/contact" },
+        desc: s.desc ?? (s as { description?: string }).description ?? "",
+        icon: s.icon,
+        cta: {
+          label: s.ctaLabel ?? (s as { cta?: { label?: string } }).cta?.label ?? "Request a Quote",
+          href: s.ctaHref ?? (s as { cta?: { href?: string } }).cta?.href ?? "/contact",
+        },
       }))
     : (fallbackServices as ServiceItem[]);
   return (

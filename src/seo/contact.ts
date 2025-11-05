@@ -1,7 +1,12 @@
 import { SITE } from "@/content/site";
 import { absUrl, clean } from "./utils";
 
-export function contactPageSchema() {
+type SiteInfo = {
+  name?: string;
+  email?: string;
+};
+
+export function contactPageSchema(site: SiteInfo = SITE) {
   return clean({
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -9,22 +14,22 @@ export function contactPageSchema() {
     url: absUrl("/contact"),
     description:
       "Get in touch to book a consultation, request a quote, or ask questions about our services.",
-    publisher: {
+    publisher: clean({
       "@type": "Organization",
-      name: SITE.name,
+      name: site.name ?? SITE.name,
       url: absUrl("/"),
       logo: absUrl("/rtr-logo.png"),
-      email: SITE.email,
-      contactPoint: SITE.email
-        ? [
-            {
-              "@type": "ContactPoint",
-              contactType: "sales",
-              email: SITE.email,
-            },
-          ]
-        : undefined,
-    },
+      email: site.email ?? SITE.email,
+      contactPoint:
+        site.email ?? SITE.email
+          ? [
+              {
+                "@type": "ContactPoint",
+                contactType: "sales",
+                email: site.email ?? SITE.email,
+              },
+            ]
+          : undefined,
+    }),
   });
 }
-

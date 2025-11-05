@@ -14,6 +14,8 @@ import { homePageSchema } from "@/seo/homepage";
 import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { buildMetadata, combineKeywords } from "@/seo/meta";
 import { keywordGroups } from "@/seo/keyword-groups";
+import { fetchHomeContent } from "@/sanity/queries";
+import { urlForImage } from "@/sanity/image";
 
 const homeKeywords = combineKeywords(
   keywordGroups.foundational,
@@ -34,7 +36,25 @@ export const metadata = buildMetadata({
 
 export const revalidate = 60;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { siteSettings, services, faqs, testimonials, projects } =
+    await fetchHomeContent();
+
+  const featuredProjects = projects.map((project) => {
+    const imageUrl = project.image
+      ? urlForImage(project.image)?.width(600).height(400).url()
+      : undefined;
+
+    return {
+      _id: project._id,
+      title: project.title,
+      blurb: project.blurb,
+      tags: project.tags,
+      comingSoon: project.comingSoon,
+      image: imageUrl ?? undefined,
+      linkUrl: project.linkUrl,
+    };
+  });
 
   return (
     <>
@@ -42,15 +62,15 @@ export default function HomePage() {
       <JsonLd id="ld-org" data={organizationSchema()} />
       <JsonLd id="ld-home" data={homePageSchema()} />
       <JsonLd id="ld-breadcrumbs" data={breadcrumbsSchema([{ name: "Home", url: "/" }])} />
-      <Header />
-      <Hero />
+      <Header site={siteSettings} />
+      <Hero site={siteSettings} />
       <About />
-      <Services />
+      <Services services={services} />
       <WhyUs />
-      <FAQ />
-      <Portfolio />
-      <Testimonials />
-      <Footer />
+      <FAQ faqs={faqs} />
+      <Portfolio projects={featuredProjects} />
+      <Testimonials testimonials={testimonials} />
+      <Footer site={siteSettings} />
     </>
   );
 }

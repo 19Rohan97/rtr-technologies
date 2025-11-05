@@ -85,6 +85,7 @@
 }
 
 :root {
+  --font-roboto: "Roboto", ui-sans-serif, system-ui, sans-serif;
   --radius: 0.625rem;
 
   /* RTR Brand Colors */

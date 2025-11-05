@@ -1,7 +1,9 @@
-import { projects } from "@/content/projects";
+import { projects as fallbackProjects } from "@/content/projects";
 import { absUrl } from "./utils";
 
-export function portfolioSchema() {
+type ProjectLike = { title: string; blurb?: string };
+
+export function portfolioSchema(projects: ProjectLike[] = fallbackProjects) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -17,4 +19,3 @@ export function portfolioSchema() {
     })),
   };
 }
-

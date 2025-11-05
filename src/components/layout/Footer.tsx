@@ -59,9 +59,18 @@ const features = [
 type SiteSettings = {
   email?: string;
   phone?: string;
+  name?: string;
+  social?: {
+    linkedin?: string;
+    instagram?: string;
+    behance?: string;
+    dribbble?: string;
+  };
 };
 
 export default function Footer({ site }: { site?: SiteSettings }) {
+  const social = site?.social ?? SITE.social;
+  const siteName = site?.name ?? SITE.name;
   return (
     <footer className="relative mt-[160px]">
       {/* Background Elements */}
@@ -272,7 +281,7 @@ export default function Footer({ site }: { site?: SiteSettings }) {
             className="flex items-center gap-4"
           >
             <p className="text-gray-600 dark:text-gray-400">
-              © {new Date().getFullYear()} {SITE.name}. All rights reserved.
+              © {new Date().getFullYear()} {siteName}. All rights reserved.
             </p>
           </motion.div>
 
@@ -290,7 +299,7 @@ export default function Footer({ site }: { site?: SiteSettings }) {
                 size="icon-sm"
                 className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
               >
-                <Link href={SITE.social.linkedin} aria-label="LinkedIn">
+                <Link href={social.linkedin ?? "#"} aria-label="LinkedIn">
                   <Linkedin className="w-4 h-4" />
                 </Link>
               </Button>
@@ -300,7 +309,7 @@ export default function Footer({ site }: { site?: SiteSettings }) {
                 size="icon-sm"
                 className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
               >
-                <Link href={SITE.social.instagram} aria-label="Instagram">
+                <Link href={social.instagram ?? "#"} aria-label="Instagram">
                   <Instagram className="w-4 h-4" />
                 </Link>
               </Button>
@@ -310,7 +319,7 @@ export default function Footer({ site }: { site?: SiteSettings }) {
                 size="icon-sm"
                 className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
               >
-                <Link href={SITE.social.behance} aria-label="Behance">
+                <Link href={social.behance ?? "#"} aria-label="Behance">
                   <ExternalLink className="w-4 h-4" />
                 </Link>
               </Button>
@@ -320,7 +329,7 @@ export default function Footer({ site }: { site?: SiteSettings }) {
                 size="icon-sm"
                 className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
               >
-                <Link href={SITE.social.dribbble} aria-label="Dribbble">
+                <Link href={social.dribbble ?? "#"} aria-label="Dribbble">
                   <ExternalLink className="w-4 h-4" />
                 </Link>
               </Button>

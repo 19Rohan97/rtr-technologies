@@ -6,11 +6,11 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbsSchema } from "@/seo/breadcrumbs";
 import { servicesSchema } from "@/seo/services";
 import { faqSchema } from "@/seo/faq";
-import { faqs } from "@/content/faqs";
 import FAQ from "@/components/sections/FAQ";
 import WhyUs from "@/components/sections/WhyUs";
 import { buildMetadata, combineKeywords } from "@/seo/meta";
 import { keywordGroups } from "@/seo/keyword-groups";
+import { fetchFaqs, fetchSiteSettings } from "@/sanity/queries";
 
 const servicesKeywords = combineKeywords(
   keywordGroups.foundational,
@@ -28,7 +28,16 @@ export const metadata = buildMetadata({
 
 export const revalidate = 60;
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [siteSettings, faqEntries] = await Promise.all([
+    fetchSiteSettings(),
+    fetchFaqs(),
+  ]);
+  const faqs = (faqEntries ?? []).map((item) => ({
+    question: item.question,
+    answer: item.answer,
+  }));
+
   return (
     <>
       <JsonLd id="ld-services" data={servicesSchema()} />
@@ -40,7 +49,7 @@ export default function ServicesPage() {
         ])}
       />
       <JsonLd id="ld-faq" data={faqSchema(faqs)} />
-      <Header />
+      <Header site={siteSettings} />
 
       <PageBanner
         title="Our Services"
@@ -49,8 +58,8 @@ export default function ServicesPage() {
       />
       <ServicesDetailed />
       <WhyUs />
-      <FAQ />
-      <Footer />
+      <FAQ faqs={faqs} />
+      <Footer site={siteSettings} />
     </>
   );
 }

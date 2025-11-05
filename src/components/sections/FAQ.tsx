@@ -1,9 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { faqs } from "@/content/faqs";
+import { faqs as fallbackFaqs } from "@/content/faqs";
 
-export default function FAQ() {
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+export default function FAQ({ faqs }: { faqs?: FAQItem[] }) {
+  const data = faqs?.length ? faqs : fallbackFaqs;
+
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   function toggle(idx: number) {
     setOpenIndex((prev) => (prev === idx ? null : idx));
@@ -23,7 +30,7 @@ export default function FAQ() {
           </p>
         </div>
         <div className="mx-auto max-w-3xl rounded-2xl border border-gray-200/60 dark:border-gray-700/60 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm">
-          {faqs.map((item, idx) => {
+          {data.map((item, idx) => {
             const open = openIndex === idx;
             return (
               <div

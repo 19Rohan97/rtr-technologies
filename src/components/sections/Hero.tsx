@@ -11,20 +11,43 @@ type SiteSettings = {
   name?: string;
   tagline?: string;
   description?: string;
-  ctas?: {
-    primaryLabel?: string;
-    primaryHref?: string;
-    secondaryLabel?: string;
-    secondaryHref?: string;
-  };
+  ctas?:
+    | {
+        primaryLabel?: string;
+        primaryHref?: string;
+        secondaryLabel?: string;
+        secondaryHref?: string;
+      }
+    | {
+        primary?: { label?: string; href?: string };
+        secondary?: { label?: string; href?: string };
+      };
 };
 
 export default function Hero({ site }: { site?: SiteSettings }) {
-  const primaryLabel = site?.ctas?.primaryLabel ?? SITE.ctas.primary.label;
-  const secondary = {
-    label: site?.ctas?.secondaryLabel ?? SITE.ctas.secondary.label,
-    href: site?.ctas?.secondaryHref ?? SITE.ctas.secondary.href,
+  const resolveCta = (key: "primary" | "secondary", fallback: { label: string; href: string }) => {
+    const ctas = site?.ctas;
+    if (!ctas) return fallback;
+    if ("primaryLabel" in ctas || "secondaryLabel" in ctas) {
+      const label = key === "primary" ? ctas.primaryLabel : ctas.secondaryLabel;
+      const href = key === "primary" ? ctas.primaryHref : ctas.secondaryHref;
+      return {
+        label: label ?? fallback.label,
+        href: href ?? fallback.href,
+      };
+    }
+    if ("primary" in ctas || "secondary" in ctas) {
+      const node = (ctas as { primary?: { label?: string; href?: string }; secondary?: { label?: string; href?: string } })[key];
+      return {
+        label: node?.label ?? fallback.label,
+        href: node?.href ?? fallback.href,
+      };
+    }
+    return fallback;
   };
+
+  const primary = resolveCta("primary", SITE.ctas.primary);
+  const secondary = resolveCta("secondary", SITE.ctas.secondary);
   return (
     <section className="relative overflow-hidden">
       <div className="grid lg:grid-cols-2 min-h-[80vh]">
@@ -57,7 +80,7 @@ export default function Hero({ site }: { site?: SiteSettings }) {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <CalendlyButton
-                  label={primaryLabel}
+                  label={primary.label}
                   variant="primary"
                   size="lg"
                   withRipple

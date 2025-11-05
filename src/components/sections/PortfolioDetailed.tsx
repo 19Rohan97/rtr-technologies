@@ -29,7 +29,21 @@ const itemVariants = {
   },
 };
 
-const detailedProjects = [
+type DetailedProject = {
+  title: string;
+  description: string;
+  image: string;
+  category?: string;
+  duration?: string;
+  teamSize?: string;
+  results?: string[];
+  technologies?: string[];
+  features?: string[];
+  status?: string;
+  cta: { label: string; href: string };
+};
+
+const detailedProjects: DetailedProject[] = [
   {
     title: "E-commerce Starter Platform",
     description:
@@ -128,7 +142,13 @@ const detailedProjects = [
   },
 ];
 
-export default function PortfolioDetailed() {
+export default function PortfolioDetailed({
+  projects,
+}: {
+  projects?: DetailedProject[];
+}) {
+  const data = projects?.length ? projects : detailedProjects;
+
   return (
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4">
@@ -139,7 +159,7 @@ export default function PortfolioDetailed() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid gap-12 md:grid-cols-2"
         >
-          {detailedProjects.map((project) => (
+          {data.map((project) => (
             <motion.div
               key={project.title}
               variants={itemVariants}
@@ -162,7 +182,7 @@ export default function PortfolioDetailed() {
               <div className="space-y-4 mb-6">
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200">
-                    {project.category}
+                    {project.category ?? "Project"}
                   </span>
                   {project.status && (
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-yellow-400 to-yellow-500 text-black">
@@ -189,7 +209,7 @@ export default function PortfolioDetailed() {
                       Duration
                     </p>
                     <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      {project.duration}
+                      {project.duration ?? "—"}
                     </p>
                   </div>
                 </div>
@@ -200,7 +220,7 @@ export default function PortfolioDetailed() {
                       Team
                     </p>
                     <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      {project.teamSize}
+                      {project.teamSize ?? "—"}
                     </p>
                   </div>
                 </div>
@@ -213,7 +233,7 @@ export default function PortfolioDetailed() {
                   Key Results:
                 </h4>
                 <ul className="space-y-2">
-                  {project.results.slice(0, 3).map((result, resultIndex) => (
+                  {(project.results ?? []).slice(0, 3).map((result, resultIndex) => (
                     <li key={resultIndex} className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
                       <span className="text-sm text-gray-600 dark:text-gray-300">
@@ -230,7 +250,7 @@ export default function PortfolioDetailed() {
                   Technologies Used:
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
+                  {(project.technologies ?? []).map((tech, techIndex) => (
                     <span
                       key={techIndex}
                       className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"

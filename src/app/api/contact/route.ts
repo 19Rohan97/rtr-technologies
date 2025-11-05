@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export async function POST(req: Request) {
   try {
@@ -37,6 +38,14 @@ export async function POST(req: Request) {
       return NextResponse.json(
         { ok: false, error: "reCAPTCHA verification failed" },
         { status: 400 }
+      );
+    }
+
+    if (!resend) {
+      console.error("Resend API key is not configured.");
+      return NextResponse.json(
+        { ok: false, error: "Email service not configured" },
+        { status: 500 }
       );
     }
 
