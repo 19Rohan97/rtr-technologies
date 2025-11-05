@@ -7,8 +7,8 @@ import { apiVersion, dataset, projectId } from "./sanity/env";
 export default defineConfig({
   name: "default",
   title: "RTR Technologies Studio",
-  projectId: projectId ?? "dummy",
-  dataset: dataset ?? "production",
+  projectId,
+  dataset,
   apiVersion,
   plugins: [deskTool(), visionTool()],
   schema: {
