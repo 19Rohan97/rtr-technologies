@@ -63,13 +63,15 @@ export default async function HomePage() {
       <JsonLd id="ld-home" data={homePageSchema()} />
       <JsonLd id="ld-breadcrumbs" data={breadcrumbsSchema([{ name: "Home", url: "/" }])} />
       <Header site={siteSettings} />
-      <Hero site={siteSettings} />
-      <About />
-      <Services services={services} />
-      <WhyUs />
-      <FAQ faqs={faqs} />
-      <Portfolio projects={featuredProjects} />
-      <Testimonials testimonials={testimonials} />
+      <main id="main-content" className="flex flex-col gap-0">
+        <Hero site={siteSettings} />
+        <About />
+        <Services services={services} />
+        <WhyUs />
+        <FAQ faqs={faqs} />
+        <Portfolio projects={featuredProjects} />
+        <Testimonials testimonials={testimonials} />
+      </main>
       <Footer site={siteSettings} />
     </>
   );

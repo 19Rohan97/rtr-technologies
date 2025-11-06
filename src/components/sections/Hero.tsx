@@ -65,7 +65,7 @@ export default function Hero({ site }: { site?: SiteSettings }) {
               </motion.h1>
 
               <motion.p
-                className="mt-6 text-lg lg:text-xl text-gray-600 leading-relaxed"
+                className="mt-6 text-lg lg:text-xl text-gray-700 dark:text-white leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}

@@ -155,6 +155,7 @@ export default function Testimonials({ testimonials }: { testimonials?: Testimon
                 size="icon"
                 onClick={prevSlide}
                 className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-white dark:hover:bg-gray-700"
+                aria-label="Show previous testimonial"
               >
                 <ChevronLeft className="w-5 h-5" />
               </Button>
@@ -180,6 +181,7 @@ export default function Testimonials({ testimonials }: { testimonials?: Testimon
                 size="icon"
                 onClick={nextSlide}
                 className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-white dark:hover:bg-gray-700"
+                aria-label="Show next testimonial"
               >
                 <ChevronRight className="w-5 h-5" />
               </Button>

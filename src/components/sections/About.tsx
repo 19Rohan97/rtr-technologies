@@ -70,38 +70,11 @@ export default function About() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid lg:grid-cols-2 gap-12 items-center"
         >
-          {/* Left Column - Values Section */}
+          {/* Main Content */}
           <motion.div
             variants={containerVariants}
-            className="space-y-6 lg:pr-8"
+            className="lg:order-2 lg:pl-8"
           >
-            {values.map((value) => {
-              const IconComponent = value.icon;
-              return (
-                <motion.div
-                  key={value.title}
-                  variants={itemVariants}
-                  whileHover={{ x: 10 }}
-                  className="flex items-start gap-4 p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:shadow-xl transition-all duration-500 group"
-                >
-                  <div className="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                    <IconComponent className="w-6 h-6 text-black" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                      {value.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-
-          {/* Right Column - Main Content */}
-          <motion.div variants={containerVariants}>
             <motion.div
               variants={itemVariants}
               className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full text-sm font-medium mb-6"
@@ -141,6 +114,36 @@ export default function About() {
               a scalable digital ecosystem that keeps performance, storytelling,
               and lead generation in lockstep as your goals evolve.
             </motion.p>
+          </motion.div>
+
+          {/* Values Section */}
+          <motion.div
+            variants={containerVariants}
+            className="space-y-6 lg:order-1 lg:pr-8"
+          >
+            {values.map((value) => {
+              const IconComponent = value.icon;
+              return (
+                <motion.div
+                  key={value.title}
+                  variants={itemVariants}
+                  whileHover={{ x: 10 }}
+                  className="flex items-start gap-4 p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:shadow-xl transition-all duration-500 group"
+                >
+                  <div className="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className="w-6 h-6 text-black" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                      {value.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </motion.div>
       </div>
