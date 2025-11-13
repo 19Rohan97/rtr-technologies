@@ -1,7 +1,10 @@
 # Changelog
 
-## 2025-03-17
+## 2025-11-13
 
+- Swapped header/hero primary CTAs to respect Sanity-configured labels + URLs instead of always opening Calendly, ensuring marketing teams control both copy and destination (`src/components/layout/Header.tsx`, `src/components/sections/Hero.tsx`).
+- Adjusted Sanity queries to pull the most recently updated `siteSettings` doc so new edits override stale entries, and added social-link guarding so empty fields no longer render placeholder icons (`src/sanity/queries.ts`, `src/components/layout/Footer.tsx`).
+- Created `SANITY.md` with Studio setup, schema walkthroughs, and editorial workflows to onboard content teams.
 - Refined dynamic blog route typing to align with Next.js 15’s promised `params`, resolving build-time type errors (`src/app/blog/[slug]/page.tsx`).
 - Updated SEO metadata helper to follow the latest Open Graph and Twitter typings, removing deprecated fields and ensuring defaults merge cleanly (`src/seo/meta.ts`).
 - Cleaned unused variables, icons, and manual font links flagged by ESLint across layout and marketing sections to keep builds warning-free (files under `src/app/layout.tsx`, `src/components/layout`, and `src/components/sections`).
