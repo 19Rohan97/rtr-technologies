@@ -19,7 +19,7 @@ import {
 } from "@/content/blog/posts";
 
 const homeContentQuery = groq`{
-  "siteSettings": *[_type == "siteSettings"][0],
+  "siteSettings": *[_type == "siteSettings"] | order(_updatedAt desc)[0],
   "services": *[_type == "service"] | order(coalesce(order, 999) asc){
     _id,
     title,
@@ -53,7 +53,7 @@ const homeContentQuery = groq`{
   }
 }`;
 
-const siteSettingsQuery = groq`*[_type == "siteSettings"][0]`;
+const siteSettingsQuery = groq`*[_type == "siteSettings"] | order(_updatedAt desc)[0]`;
 
 const servicesQuery = groq`*[_type == "service"] | order(coalesce(order, 999) asc){
   _id,
