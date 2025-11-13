@@ -71,6 +71,12 @@ type SiteSettings = {
 export default function Footer({ site }: { site?: SiteSettings }) {
   const social = site?.social ?? SITE.social;
   const siteName = site?.name ?? SITE.name;
+  const socialLinks = [
+    { href: social.linkedin, label: "LinkedIn", Icon: Linkedin },
+    { href: social.instagram, label: "Instagram", Icon: Instagram },
+    { href: social.behance, label: "Behance", Icon: ExternalLink },
+    { href: social.dribbble, label: "Dribbble", Icon: ExternalLink },
+  ].filter((item) => Boolean(item.href));
   return (
     <footer className="relative mt-[160px]">
       {/* Background Elements */}
@@ -292,48 +298,23 @@ export default function Footer({ site }: { site?: SiteSettings }) {
             <span className="text-sm text-gray-500 dark:text-gray-400">
               Follow us:
             </span>
-            <div className="flex gap-3">
-              <Button
-                asChild
-                variant="ghost"
-                size="icon-sm"
-                className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
-              >
-                <Link href={social.linkedin ?? "#"} aria-label="LinkedIn">
-                  <Linkedin className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="icon-sm"
-                className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
-              >
-                <Link href={social.instagram ?? "#"} aria-label="Instagram">
-                  <Instagram className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="icon-sm"
-                className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
-              >
-                <Link href={social.behance ?? "#"} aria-label="Behance">
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="icon-sm"
-                className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
-              >
-                <Link href={social.dribbble ?? "#"} aria-label="Dribbble">
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
-              </Button>
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="flex gap-3">
+                {socialLinks.map(({ href, label, Icon }) => (
+                  <Button
+                    key={label}
+                    asChild
+                    variant="ghost"
+                    size="icon-sm"
+                    className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:border-yellow-200 dark:hover:border-yellow-800"
+                  >
+                    <Link href={href!} aria-label={label}>
+                      <Icon className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                ))}
+              </div>
+            )}
           </motion.div>
         </motion.div>
       </motion.div>
