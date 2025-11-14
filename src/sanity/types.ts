@@ -22,16 +22,6 @@ export type SiteSettings = {
   };
 };
 
-export type Service = {
-  _id: string;
-  title: string;
-  description: string;
-  icon: string;
-  ctaLabel?: string;
-  ctaHref?: string;
-  order?: number;
-};
-
 export type FAQ = {
   _id: string;
   question: string;
@@ -103,7 +93,6 @@ export type BlogPost = {
 
 export type HomeContent = {
   siteSettings?: SiteSettings;
-  services: Service[];
   faqs: FAQ[];
   testimonials: Testimonial[];
   projects: Project[];

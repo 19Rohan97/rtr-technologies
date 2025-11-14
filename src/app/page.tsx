@@ -16,6 +16,7 @@ import { buildMetadata, combineKeywords } from "@/seo/meta";
 import { keywordGroups } from "@/seo/keyword-groups";
 import { fetchHomeContent } from "@/sanity/queries";
 import { urlForImage } from "@/sanity/image";
+import { services as serviceCards } from "@/content/services";
 
 const homeKeywords = combineKeywords(
   keywordGroups.foundational,
@@ -37,7 +38,7 @@ export const metadata = buildMetadata({
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const { siteSettings, services, faqs, testimonials, projects } =
+  const { siteSettings, faqs, testimonials, projects } =
     await fetchHomeContent();
 
   const featuredProjects = projects.map((project) => {
@@ -66,7 +67,7 @@ export default async function HomePage() {
       <main id="main-content" className="flex flex-col gap-0">
         <Hero site={siteSettings} />
         <About />
-        <Services services={services} />
+        <Services services={serviceCards} />
         <WhyUs />
         <FAQ faqs={faqs} />
         <Portfolio projects={featuredProjects} />

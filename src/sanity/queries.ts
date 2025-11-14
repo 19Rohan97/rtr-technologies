@@ -4,12 +4,10 @@ import type {
   BlogPost,
   HomeContent,
   SiteSettings,
-  Service,
   FAQ,
   Testimonial,
   Project,
 } from "./types";
-import { services as fallbackServices } from "@/content/services";
 import { faqs as fallbackFaqs } from "@/content/faqs";
 import { testimonials as fallbackTestimonials } from "@/content/testimonials";
 import { projects as fallbackProjects } from "@/content/projects";
@@ -20,15 +18,6 @@ import {
 
 const homeContentQuery = groq`{
   "siteSettings": *[_type == "siteSettings"] | order(_updatedAt desc)[0],
-  "services": *[_type == "service"] | order(coalesce(order, 999) asc){
-    _id,
-    title,
-    "description": coalesce(description, ""),
-    icon,
-    ctaLabel,
-    ctaHref,
-    order
-  },
   "faqs": *[_type == "faq"] | order(coalesce(order, 999) asc){
     _id,
     question,
@@ -54,16 +43,6 @@ const homeContentQuery = groq`{
 }`;
 
 const siteSettingsQuery = groq`*[_type == "siteSettings"] | order(_updatedAt desc)[0]`;
-
-const servicesQuery = groq`*[_type == "service"] | order(coalesce(order, 999) asc){
-  _id,
-  title,
-  "description": coalesce(description, ""),
-  icon,
-  ctaLabel,
-  ctaHref,
-  order
-}`;
 
 const faqsQuery = groq`*[_type == "faq"] | order(coalesce(order, 999) asc){
   _id,
@@ -134,13 +113,6 @@ const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug]
   image
 }`;
 
-type LegacyService = {
-  title: string;
-  desc: string;
-  icon: string;
-  cta?: { label: string; href: string };
-};
-
 type LegacyFaq = {
   question: string;
   answer: string;
@@ -158,15 +130,6 @@ type LegacyTestimonial = {
   quote: string;
   author: string;
 };
-
-const mapLegacyService = (service: LegacyService): Service => ({
-  _id: service.title,
-  title: service.title,
-  description: service.desc,
-  icon: service.icon,
-  ctaLabel: service.cta?.label,
-  ctaHref: service.cta?.href,
-});
 
 const mapLegacyFaq = (faq: LegacyFaq): FAQ => ({
   _id: faq.question,
@@ -220,7 +183,6 @@ export async function fetchHomeContent(): Promise<HomeContent> {
   if (!sanityClient) {
     return {
       siteSettings: undefined,
-      services: fallbackServices.map(mapLegacyService),
       faqs: fallbackFaqs.map(mapLegacyFaq),
       testimonials: fallbackTestimonials.map(mapLegacyTestimonial),
       projects: fallbackProjects.map(mapLegacyProject),
@@ -231,7 +193,6 @@ export async function fetchHomeContent(): Promise<HomeContent> {
     const data = await sanityClient.fetch<HomeContent>(homeContentQuery, {}, fetchOptions);
     return {
       siteSettings: data.siteSettings ?? undefined,
-      services: data.services ?? [],
       faqs: data.faqs ?? [],
       testimonials: data.testimonials ?? [],
       projects: data.projects ?? [],
@@ -240,7 +201,6 @@ export async function fetchHomeContent(): Promise<HomeContent> {
     console.warn("Sanity home content fetch failed, falling back to static content.", error);
     return {
       siteSettings: undefined,
-      services: fallbackServices.map(mapLegacyService),
       faqs: fallbackFaqs.map(mapLegacyFaq),
       testimonials: fallbackTestimonials.map(mapLegacyTestimonial),
       projects: fallbackProjects.map(mapLegacyProject),
@@ -258,19 +218,6 @@ export async function fetchSiteSettings(): Promise<SiteSettings | undefined> {
   } catch (error) {
     console.warn("Failed to fetch site settings from Sanity.", error);
     return undefined;
-  }
-}
-
-export async function fetchServices(): Promise<Service[]> {
-  if (!sanityClient) {
-    return fallbackServices.map(mapLegacyService);
-  }
-
-  try {
-    return (await sanityClient.fetch<Service[]>(servicesQuery, {}, fetchOptions)) ?? [];
-  } catch (error) {
-    console.warn("Failed to fetch services from Sanity.", error);
-    return fallbackServices.map(mapLegacyService);
   }
 }
 

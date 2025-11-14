@@ -38,12 +38,11 @@ sanity dev
 
 ## 🗂️ Content Model Overview
 
-`sanity/schemaTypes/index.ts` registers six document types. Publishing any entry instantly updates the live site (ISR revalidates every 60 s).
+`sanity/schemaTypes/index.ts` registers five document types. Publishing any entry instantly updates the live site (ISR revalidates every 60 s).
 
 | Document | Purpose | Key Fields |
 | --- | --- | --- |
 | `siteSettings` | Global brand/contact data consumed by header, hero, and contact page. | `name`, `tagline`, `description`, `email`, `phone`, `social.*`, `ctas.primary/secondary` |
-| `service` | Service cards for homepage and detail modules. | `title`, `description`, `icon` (Lucide name), `ctaLabel`, `ctaHref`, `order` |
 | `faq` | FAQ accordion on home/services pages & FAQ schema. | `question`, `answer`, `order` |
 | `testimonial` | Testimonials carousel content. | `quote`, `author`, `order` |
 | `project` | Portfolio cards and detailed case study data. | `title`, `blurb`, `category`, `duration`, `teamSize`, `tags`, `results`, `features`, `status`, `cta.*`, `linkUrl`, `image`, `order` |
@@ -63,10 +62,8 @@ sanity dev
 - `social` URL fields surface in the contact “Follow Us” buttons and structured data.
 - `ctas.primary/secondary` override header + hero button labels/links (fallbacks live in `src/content/site.ts`).
 
-### 2. Services
-- Each service becomes an item in the homepage “Services” grid and other sections via `fetchServices`.
-- `icon` must match a Lucide icon identifier referenced in the UI layer (e.g., `Code`, `TrendingUp`).
-- Leave `cta` blank to fall back to static defaults.
+### 2. Services (code-managed)
+- Service cards remain code-driven in `src/content/services.ts` to preserve a consistent layout; editors do not manage them in Sanity.
 
 ### 3. FAQs
 - Provide question/answer pairs; use `order` for sequencing.
@@ -111,7 +108,6 @@ sanity dev
 ## 🧰 Troubleshooting & Tips
 - **No Sanity data?** The app logs a warning and falls back to `src/content/*`. Confirm env vars and that the Studio project/dataset exist.
 - **Broken images?** Ensure each `project`/`blogPost` entry has an image and that the asset is published. The site resizes via `urlForImage`; missing assets return `null`.
-- **Icon mismatch?** If a service’s `icon` doesn’t correspond to a Lucide component, the frontend will likely fall back to a default or break. Stick to documented names (see `lucide.dev/icons`).
 - **Preview needs?** You already have a `SANITY_READ_TOKEN` hook in `tokenClient`; wire this into Next.js preview routes if editorial previewing becomes required.
 - **Sitemap discrepancies?** Keep Sanity slugs (especially for blog posts) aligned with the `next-sitemap` config if you expect deterministic static paths.
 
