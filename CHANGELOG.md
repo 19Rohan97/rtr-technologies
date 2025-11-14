@@ -6,6 +6,8 @@
 - Adjusted Sanity queries to pull the most recently updated `siteSettings` doc so new edits override stale entries, and added social-link guarding so empty fields no longer render placeholder icons (`src/sanity/queries.ts`, `src/components/layout/Footer.tsx`).
 - Created `SANITY.md` with Studio setup, schema walkthroughs, and editorial workflows to onboard content teams.
 - Removed the `service` schema + fetch helpers so service cards are solely code-driven via `src/content/services.ts`, simplifying editorial responsibilities (`sanity/schemaTypes`, `src/sanity/types.ts`, `src/sanity/queries.ts`, `src/app/page.tsx`, `SANITY.md`).
+- Scoped the `/services` page FAQ to the code-defined list so editors don’t accidentally override services-specific messaging via Sanity (`src/app/services/page.tsx`, `src/sanity/queries.ts`, `SANITY.md`).
+- Added `BLOG_BRIEF.md`, a ready-to-use prompt template that explains every Sanity blog field, enforces 2,000–2,500 word counts, and standardizes keyword/CTA requirements for ChatGPT-generated insights.
 - Refined dynamic blog route typing to align with Next.js 15’s promised `params`, resolving build-time type errors (`src/app/blog/[slug]/page.tsx`).
 - Updated SEO metadata helper to follow the latest Open Graph and Twitter typings, removing deprecated fields and ensuring defaults merge cleanly (`src/seo/meta.ts`).
 - Cleaned unused variables, icons, and manual font links flagged by ESLint across layout and marketing sections to keep builds warning-free (files under `src/app/layout.tsx`, `src/components/layout`, and `src/components/sections`).

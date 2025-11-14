@@ -160,3 +160,8 @@ This is a private project. For any changes or updates, please contact the develo
 ---
 
 Built with ❤️ by RTR Technologies
+# Additional Resources
+
+- `SANITY.md` – CMS setup & editing guide.
+- `BLOG_BRIEF.md` – Prompt template for generating schema-ready blog content in ChatGPT.
+

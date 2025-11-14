@@ -10,7 +10,8 @@ import FAQ from "@/components/sections/FAQ";
 import WhyUs from "@/components/sections/WhyUs";
 import { buildMetadata, combineKeywords } from "@/seo/meta";
 import { keywordGroups } from "@/seo/keyword-groups";
-import { fetchFaqs, fetchSiteSettings } from "@/sanity/queries";
+import { fetchSiteSettings } from "@/sanity/queries";
+import { faqs as servicesFaqs } from "@/content/faqs";
 
 const servicesKeywords = combineKeywords(
   keywordGroups.foundational,
@@ -29,14 +30,7 @@ export const metadata = buildMetadata({
 export const revalidate = 60;
 
 export default async function ServicesPage() {
-  const [siteSettings, faqEntries] = await Promise.all([
-    fetchSiteSettings(),
-    fetchFaqs(),
-  ]);
-  const faqs = (faqEntries ?? []).map((item) => ({
-    question: item.question,
-    answer: item.answer,
-  }));
+  const siteSettings = await fetchSiteSettings();
 
   return (
     <>
@@ -48,7 +42,7 @@ export default async function ServicesPage() {
           { name: "Services", url: "/services" },
         ])}
       />
-      <JsonLd id="ld-faq" data={faqSchema(faqs)} />
+      <JsonLd id="ld-faq" data={faqSchema(servicesFaqs)} />
       <Header site={siteSettings} />
 
       <PageBanner
@@ -58,7 +52,7 @@ export default async function ServicesPage() {
       />
       <ServicesDetailed />
       <WhyUs />
-      <FAQ faqs={faqs} />
+      <FAQ faqs={servicesFaqs} />
       <Footer site={siteSettings} />
     </>
   );

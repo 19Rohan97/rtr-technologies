@@ -44,13 +44,6 @@ const homeContentQuery = groq`{
 
 const siteSettingsQuery = groq`*[_type == "siteSettings"] | order(_updatedAt desc)[0]`;
 
-const faqsQuery = groq`*[_type == "faq"] | order(coalesce(order, 999) asc){
-  _id,
-  question,
-  answer,
-  order
-}`;
-
 const testimonialsQuery = groq`*[_type == "testimonial"] | order(coalesce(order, 999) asc){
   _id,
   quote,
@@ -218,19 +211,6 @@ export async function fetchSiteSettings(): Promise<SiteSettings | undefined> {
   } catch (error) {
     console.warn("Failed to fetch site settings from Sanity.", error);
     return undefined;
-  }
-}
-
-export async function fetchFaqs(): Promise<FAQ[]> {
-  if (!sanityClient) {
-    return fallbackFaqs.map(mapLegacyFaq);
-  }
-
-  try {
-    return (await sanityClient.fetch<FAQ[]>(faqsQuery, {}, fetchOptions)) ?? [];
-  } catch (error) {
-    console.warn("Failed to fetch FAQs from Sanity.", error);
-    return fallbackFaqs.map(mapLegacyFaq);
   }
 }
 

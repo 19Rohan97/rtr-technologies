@@ -68,6 +68,7 @@ sanity dev
 ### 3. FAQs
 - Provide question/answer pairs; use `order` for sequencing.
 - These entries also drive the JSON-LD FAQ schema (`faqSchema`) for better SERP snippets.
+- Note: the `/services` overview page uses the code-defined list in `src/content/faqs.ts`, so edits here affect the homepage (and other CMS-driven areas) but not the services-specific FAQ.
 
 ### 4. Testimonials
 - Short quote + author formats only; keep them concise for the carousel layout.
